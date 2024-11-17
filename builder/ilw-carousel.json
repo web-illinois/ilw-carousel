@@ -1,9 +1,9 @@
 {
-    "title": "<%= _.startCase(name.slice(4)) %>",
-    "tag": "<%= name %>",
-    "github": "https://github.com/web-illinois/<%= name %>/",
+    "title": "Carousel",
+    "tag": "ilw-carousel",
+    "github": "https://github.com/web-illinois/ilw-carousel/",
     "type": "web component",
-    "element-name": "<%= name %>",
+    "element-name": "ilw-carousel",
     "description": "Description for builder.",
     "purpose": "Imperative mood purpose for builder homepage.",
     "toolkit-version": "",
