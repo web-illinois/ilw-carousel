@@ -7,7 +7,7 @@ export default defineConfig({
         outDir: "../dist",
         lib: {
             name: "ilw-carousel",
-            entry: "ilw-carousel.js",
+            entry: "ilw-carousel.ts",
             fileName: "ilw-carousel",
             formats: ["es", "cjs", "umd"],
         },

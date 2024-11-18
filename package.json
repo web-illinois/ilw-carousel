@@ -13,7 +13,7 @@
     ],
     "exports": {
         ".": {
-            "import": "./src/ilw-carousel.js",
+            "import": "./src/ilw-carousel.ts",
             "require": "./dist/ilw-carousel.cjs",
             "default": "./dist/ilw-carousel.js"
         }
@@ -29,6 +29,8 @@
         "lit": "3.1.3"
     },
     "devDependencies": {
-        "vite": "^5.4.11"
+        "vite": "^5.4.11",
+        "typescript": "^5.6.3",
+        "prettier": "^3.3.3"
     }
 }

@@ -6,7 +6,7 @@ Links: **[ilw-carousel in Builder](https://builder3.toolkit.illinois.edu/compone
 
 ## Overview
 
-A 1-3 paragraph explanation of what the component does and how it presents.
+A carousel component that displays a changing image and some associated content for each.
 
 ## Code Examples
 

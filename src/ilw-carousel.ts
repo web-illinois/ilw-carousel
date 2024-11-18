@@ -1,14 +1,15 @@
 import { LitElement, html, unsafeCSS } from "lit";
+// @ts-ignore
 import styles from './ilw-carousel.styles.css?inline';
-import './ilw-carousel.css';
+// @ts-ignore
+import "./ilw-carousel.css";
+import { customElement, property } from "lit/decorators.js";
 
+@customElement('ilw-carousel')
 class Carousel extends LitElement {
 
-    static get properties() {
-        return {
-            theme: { type: String, attribute: true }
-        };
-    }
+    @property()
+    theme = '';
 
     static get styles() {
         return unsafeCSS(styles);
@@ -16,16 +17,20 @@ class Carousel extends LitElement {
 
     constructor() {
         super();
-        this.theme = '';
     }
 
     render() {
         return html`
             <div>
                 <slot></slot>
+                <p>Oh my lovely carousel</p>
             </div>
         `;
     }
 }
 
-customElements.define('ilw-carousel', Carousel);
+declare global {
+    interface HTMLElementTagNameMap {
+        'ilw-carousel': Carousel
+    }
+}
