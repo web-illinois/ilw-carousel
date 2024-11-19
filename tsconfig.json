@@ -11,7 +11,8 @@
         "moduleDetection": "force",
         "declaration": true,
         "emitDeclarationOnly": true,
-        "strict": true
+        "strict": true,
+        "declarationMap": true
     },
     "include": ["src"],
 }
