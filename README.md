@@ -26,3 +26,6 @@ Consider accessibility, both for building the component and for its use:
 - Are form fields, figures, fieldsets and other interactive elements labelled?
 
 ## External References
+
+- https://www.w3.org/WAI/ARIA/apg/patterns/carousel/
+- https://www.nngroup.com/articles/designing-effective-carousels/

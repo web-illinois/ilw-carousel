@@ -1,10 +1,10 @@
 /* Styleable variables are in the base layer so they can be overridden easily */
 @layer base {
     :host {
-
+        --ilw-carousel--variable: #456456;
     }
 }
 
-:host {
+p {
     color: #123123;
 }

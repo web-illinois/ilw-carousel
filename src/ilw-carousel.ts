@@ -6,7 +6,7 @@ import "./ilw-carousel.css";
 import { customElement, property } from "lit/decorators.js";
 
 @customElement('ilw-carousel')
-class Carousel extends LitElement {
+export class Carousel extends LitElement {
 
     @property()
     theme = '';

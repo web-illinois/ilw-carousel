@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
     root: "src",
     build: {
-        outDir: "../dist/cdn",
+        outDir: "../dist",
         lib: {
             name: "ilw-carousel",
             entry: "ilw-carousel.ts",
@@ -12,6 +13,7 @@ export default defineConfig({
             formats: ["es"],
         },
         rollupOptions: {
+            external: [/^@?lit/],
             output: {
                 assetFileNames: (chunkInfo) => {
                     if (chunkInfo.name === "style.css") return "ilw-carousel.css";
@@ -22,4 +24,5 @@ export default defineConfig({
     server: {
         hmr: false,
     },
+    plugins: [dts()],
 });

@@ -51,14 +51,14 @@ jobs:
           aws-region: us-east-2
 
       - name: Deploy toolbox to S3 bucket for major version
-        run: aws s3 sync ./dist/ s3://cdn.toolkit.illinois.edu/content/$COMPONENT_NAME/$MAJORVERSION --delete --acl bucket-owner-full-control
+        run: aws s3 sync ./dist/cdn/ s3://cdn.toolkit.illinois.edu/content/$COMPONENT_NAME/$MAJORVERSION --delete --acl bucket-owner-full-control
       - name: Invalidate Cloudfront cache for major version
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.TOOLKIT_AWS_CLOUDFRONT }} --paths "/$COMPONENT_NAME/$MAJORVERSION*"
       - name: Deploy toolbox to S3 bucket for minor version
-        run: aws s3 sync ./dist/ s3://cdn.toolkit.illinois.edu/content/$COMPONENT_NAME/$MINORVERSION --delete --acl bucket-owner-full-control
+        run: aws s3 sync ./dist/cdn/ s3://cdn.toolkit.illinois.edu/content/$COMPONENT_NAME/$MINORVERSION --delete --acl bucket-owner-full-control
       - name: Invalidate Cloudfront cache for minor version
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.TOOLKIT_AWS_CLOUDFRONT }} --paths "/$COMPONENT_NAME/$MINORVERSION*"
       - name: Deploy toolbox to S3 bucket for patch (full) version
-        run: aws s3 sync ./dist/ s3://cdn.toolkit.illinois.edu/content/$COMPONENT_NAME/$FULLVERSION --delete --acl bucket-owner-full-control
+        run: aws s3 sync ./dist/cdn/ s3://cdn.toolkit.illinois.edu/content/$COMPONENT_NAME/$FULLVERSION --delete --acl bucket-owner-full-control
       - name: Invalidate Cloudfront cache for patch (full) version
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.TOOLKIT_AWS_CLOUDFRONT }} --paths "/$COMPONENT_NAME/$FULLVERSION*"
