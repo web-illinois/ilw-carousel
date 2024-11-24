@@ -3,8 +3,7 @@ import {LitElement, html, unsafeCSS, TemplateResult, nothing, PropertyValues} fr
 import styles from "./Carousel.styles.css?inline";
 // @ts-ignore
 import "./ilw-carousel.css";
-import { customElement, property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
-import Slide from "./Slide";
+import { customElement, property, query, queryAll, state } from "lit/decorators.js";
 import { ManualSlotController } from "./util/ManualSlotController";
 import { classMap } from "lit/directives/class-map.js";
 import "@illinois-toolkit/ilw-icon";
@@ -40,9 +39,6 @@ export default class Carousel extends LitElement {
     @property({ type: Number })
     time = 10;
 
-    @state()
-    private slideCount = 0;
-
     /**
      * 1-based active slide
      *
@@ -51,14 +47,12 @@ export default class Carousel extends LitElement {
     @state()
     private activeSlide = 1;
 
-    // Not in state, since this is used in the animation.
+    // Not in state, we don't want these to be reactive. They're used in the animation
+    // and don't affect the render function.
     private hasHover = false;
     private userStarted = false;
     private hasControlFocus = false;
     private hasTabFocus = false;
-
-    // This is not reactive, we only use it in render when redrawing the whole component,
-    // the style is normally updated through the timer.
     private timer = 0;
     private updateTime = 0;
     private animationRequest = 0;
@@ -84,6 +78,12 @@ export default class Carousel extends LitElement {
         super();
     }
 
+    /**
+     * Toggle between playing and paused states.
+     *
+     * If this function is called to play, it is considered to be the user
+     * who started it.
+     */
     public togglePlay() {
         this.playing = !this.playing;
         if (this.playing) {
@@ -118,28 +118,6 @@ export default class Carousel extends LitElement {
         this.playing = false;
     }
 
-    protected determinePrevNext(count: number, active: number) {
-        if (count < 2) {
-            // If we only have 1 slide, there's no prev or next
-            return {
-                prev: 0,
-                next: 0,
-            };
-        }
-        if (count === 2) {
-            // If active is 1, this is 2. If active is 2, this is 1.
-            return {
-                prev: 3 - active,
-                next: 3 - active,
-            };
-        }
-        // Loop around if active is the first or last
-        return {
-            prev: active === 1 ? count : active - 1,
-            next: active === count ? 1 : active + 1,
-        };
-    }
-
     /**
      * Go to next slide and stop playback due to interaction.
      */
@@ -157,12 +135,11 @@ export default class Carousel extends LitElement {
     }
 
     /**
-     * Stop slide's from advancing when mouse is over the carousel.
+     * Stop slides from advancing when mouse is over the carousel.
      */
     protected mouseOver(event: MouseEvent) {
         if (event.target instanceof Node && this.playPause.contains(event.target)) {
-            // If the mouse is in the play button, we don't have to stop it since the user likely
-            // just clicked it
+            // If the mouse is in the play button, keep playing
             return;
         }
         this.hasHover = true;
@@ -196,6 +173,9 @@ export default class Carousel extends LitElement {
         this.hasControlFocus = false;
     }
 
+    /**
+     * Handle key events for the tabs to use arrow keys and home/end.
+     */
     protected tabsKeyDown(event: KeyboardEvent) {
         let flag = false;
 
@@ -225,18 +205,26 @@ export default class Carousel extends LitElement {
         }
 
         if (flag) {
+            // We need to also move the focus, since it doesn't move automatically
             this.tabs[this.activeSlide - 1].focus();
             event.stopPropagation();
             event.preventDefault();
         }
     }
 
+    /**
+     * Move the animated progress bar and activate the next slide when appropriate.
+     *
+     * Animation requests are needed for smooth progress, and we utilize this function
+     * to also activate the next slide when time's up.
+     */
     protected animationRequestCallback = () => {
         if (this.playing) {
             const now = Date.now();
-            const timeMs = this.time * 1000;
 
+            // This effectively pauses the timer in certain conditions
             if (this.userStarted || (!this.hasHover && !this.hasControlFocus && !this.hasTabFocus)) {
+                const timeMs = this.time * 1000;
                 this.timer += now - this.updateTime;
 
                 if (this.timer >= timeMs) {
@@ -252,13 +240,13 @@ export default class Carousel extends LitElement {
             }
 
             requestAnimationFrame(this.animationRequestCallback);
-        } else if (this.animationRequest) {
-            cancelAnimationFrame(this.animationRequest);
         }
     };
 
     connectedCallback() {
         super.connectedCallback();
+
+        // Never autoplay with prefers reduced motion
         let hasReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
         if (hasReducedMotion.matches) {
             this.playing = false;
@@ -271,6 +259,7 @@ export default class Carousel extends LitElement {
     protected update(changedProperties: PropertyValues) {
         super.update(changedProperties);
 
+        // If playing state changed, and it's now true, start playing
         if (changedProperties.has("playing") && this.playing) {
             if (this.animationRequest) {
                 cancelAnimationFrame(this.animationRequest);
@@ -283,7 +272,7 @@ export default class Carousel extends LitElement {
     protected updated(changedProperties: PropertyValues) {
         super.updated(changedProperties);
 
-        // Listen to focus events on links inside the carousel content so we can pause it
+        // Listen to focus events on links inside the carousel content so we can pause progress
         for (let it of Array.from(this.querySelectorAll("ilw-slide a"))) {
             it.addEventListener("focus", this.onControlFocus);
             it.addEventListener("focusout", this.offControlFocus);
@@ -298,6 +287,9 @@ export default class Carousel extends LitElement {
         const { prev, next } = this.determinePrevNext(count, active);
 
         for (let i = 1; i <= count; i++) {
+            // Lambda function that keeps the index in scope for each tab.
+            // Note the tabindex value - it's -1 for all tabs except the active one, which makes the
+            // tablist receive focus once, like a radio group.
             let activateSlide = () => this.activateSlide(i);
             tabs.push(
                 html` <button
@@ -335,6 +327,7 @@ export default class Carousel extends LitElement {
             );
         }
 
+        // If there's one or zero slides, render a simpler component, basically a hero component.
         if (items.length < 2) {
             return this.renderOne(items);
         }
@@ -400,6 +393,28 @@ export default class Carousel extends LitElement {
                 </div>
             </div>
         `;
+    }
+
+    protected determinePrevNext(count: number, active: number) {
+        if (count < 2) {
+            // If we only have 1 slide, there's no prev or next
+            return {
+                prev: 0,
+                next: 0,
+            };
+        }
+        if (count === 2) {
+            // If active is 1, this is 2. If active is 2, this is 1.
+            return {
+                prev: 3 - active,
+                next: 3 - active,
+            };
+        }
+        // Loop around if active is the first or last
+        return {
+            prev: active === 1 ? count : active - 1,
+            next: active === count ? 1 : active + 1,
+        };
     }
 }
 
