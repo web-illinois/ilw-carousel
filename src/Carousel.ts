@@ -1,4 +1,4 @@
-import {LitElement, html, unsafeCSS, TemplateResult, nothing, PropertyValues} from "lit";
+import { LitElement, html, unsafeCSS, TemplateResult, nothing, PropertyValues } from "lit";
 // @ts-ignore
 import styles from "./Carousel.styles.css?inline";
 // @ts-ignore
@@ -16,21 +16,25 @@ export default class Carousel extends LitElement {
         return unsafeCSS(styles);
     }
 
-    @property()
-    theme = "";
-
     /**
      * Label for the whole carousel.
      */
     @property()
-    label = "";
+    label = "Highlighted content";
 
     /**
      * Control play/pause state on the carousel. Defaults to false.
      *
      * This value is updated on the component, so it can be used for reading as well.
      */
-    @property({ reflect: true, type: Boolean })
+    @property({
+        reflect: true,
+        type: Boolean,
+        converter: {
+            fromAttribute: (value) => value && value !== "false",
+            toAttribute: value => value ? "true" : "false"
+        },
+    })
     playing = true;
 
     /**
@@ -40,11 +44,9 @@ export default class Carousel extends LitElement {
     time = 10;
 
     /**
-     * 1-based active slide
-     *
-     * @private
+     * 1-based active slide.
      */
-    @state()
+    @property({ type: Number, reflect: true, attribute: "active-slide" })
     private activeSlide = 1;
 
     // Not in state, we don't want these to be reactive. They're used in the animation
@@ -167,11 +169,11 @@ export default class Carousel extends LitElement {
      */
     protected onControlFocus = () => {
         this.hasControlFocus = true;
-    }
+    };
 
     protected offControlFocus = () => {
         this.hasControlFocus = false;
-    }
+    };
 
     /**
      * Handle key events for the tabs to use arrow keys and home/end.
@@ -333,7 +335,11 @@ export default class Carousel extends LitElement {
         }
 
         return html`
-            <section class="carousel-inner" @mouseover=${this.mouseOver} @mouseout=${this.mouseOut}>
+            <section class="carousel-inner"
+                     aria-roledescription="carousel"
+                     aria-label=${this.label}
+                     @mouseover=${this.mouseOver} @mouseout=${this.mouseOut}
+            >
                 <div class="control-position">
                     <div class="control">
                         <div id="progress-wrap">

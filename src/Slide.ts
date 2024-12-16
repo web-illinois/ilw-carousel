@@ -20,11 +20,11 @@ export default class Slide extends LitElement {
     render() {
         return html`
             <div class="slide-inner">
+                <div class="content">
+                    <slot></slot>
+                </div>
                 <div class="image">
                     <slot name="image"></slot>
-                </div>
-                <div class="content">
-                    <slot name="content"></slot>
                 </div>
             </div>
         `;

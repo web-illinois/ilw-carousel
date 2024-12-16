@@ -17,6 +17,11 @@ p {
     }
 }
 
+.slide-inner {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 .content {
     background: #45645633;
     max-width: 600px;
