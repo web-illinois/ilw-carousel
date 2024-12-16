@@ -1,0 +1,29 @@
+/* Styleable variables are in the base layer so they can be overridden easily */
+@layer base {
+    :host {
+        --ilw-carousel--variable: #456456;
+    }
+}
+
+p {
+    color: #123123;
+}
+
+.image {
+    ::slotted(img) {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+}
+
+.slide-inner {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.content {
+    background: #45645633;
+    max-width: 600px;
+    margin: 60px auto 0;
+}
