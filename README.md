@@ -89,9 +89,9 @@ a component that's primarily a visual feature. This implementation tries to be e
      - Slide text is above the image so any potential heading in the text is the first element.
 - The buttons controlling slide selection have the role `tab` and work like a radio button group. Focus only lands
   on the active button, and then the selection is changed with arrows when using a keyboard.
-  - The label for a slide just says "Slide <number>", e.g. "Slide 1".
+  - The label for a slide just says "Slide (number)", e.g. "Slide 1".
 - Each slide has the role `tabpanel`, and role description "slide".
-  - The label for a slide is: <number> of <slide count>, e.g. "1 of 3", which is announced
+  - The label for a slide is: (number) of (slide count), e.g. "1 of 3", which is announced
     with the role description "slide".
 - If the tabs have focus, the slide content area is given `aria-live="polite"`, which makes screen readers announce the
   slide contents when the user manually changes it to a new slide. 
