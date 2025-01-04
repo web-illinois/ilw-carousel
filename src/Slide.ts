@@ -1,13 +1,26 @@
 import { LitElement, html, unsafeCSS } from "lit";
 // @ts-ignore
-import styles from './Slide.styles.css?inline';
+import styles from "./Slide.styles.css?inline";
 import { customElement, property } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import {booleanConverter} from "./util/converters";
 
-@customElement('ilw-slide')
+@customElement("ilw-slide")
 export default class Slide extends LitElement {
-
     @property()
-    theme = '';
+    theme = "";
+
+    @property({
+        type: Boolean,
+        converter: booleanConverter,
+    })
+    overlay = false;
+
+    @property({
+        type: Boolean,
+        converter: booleanConverter,
+    })
+    single = false;
 
     static get styles() {
         return unsafeCSS(styles);
@@ -18,11 +31,20 @@ export default class Slide extends LitElement {
     }
 
     render() {
+        const classes = {
+            "slide-inner": true,
+            overlay: this.overlay,
+            single: this.single
+        };
+
         return html`
-            <div class="slide-inner">
+            <div class=${classMap(classes)}>
                 <div class="content-wrap">
                     <div class="content">
                         <slot></slot>
+                    </div>
+                    <div class="overlay-buttons">
+                        <slot name="buttons"></slot>
                     </div>
                 </div>
                 <div class="image">
@@ -35,6 +57,6 @@ export default class Slide extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        'ilw-slide': Slide
+        "ilw-slide": Slide;
     }
 }

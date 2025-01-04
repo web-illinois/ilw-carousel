@@ -1,10 +1,27 @@
+:root {
+}
+
 /* Styleable variables are in the base layer so they can be overridden easily */
 @layer base {
     :host {
         --ilw-carousel--font: var(--il-font-sans);
+        --ilw-carousel--height: 500px;
 
         --ilw-carousel--background: #fff;
-        --ilw-carousel--control--background: #fff;
+        --ilw-carousel--control--height: 80px;
+        --ilw-carousel--control--background: var(--il-storm-lighter-4);
+        --ilw-carousel--progress--width: 300px;
+        --ilw-carousel--progress--height: 10px;
+        --ilw-carousel--tabs--column-gap: 10px;
+        --ilw-carousel--tabs--margin-top: 10px;
+        --ilw-carousel--button--border-width: 2px;
+        --ilw-carousel--prevnext--height: 160px;
+        --ilw-carousel--prevntext--width: 44px;
+        --ilw-carousel--play--height: 40px;
+        --ilw-carousel--play--font: 400 1.8rem/1 var(--il-font-sans);
+        --ilw-carousel--tabs--height: 32px;
+        --ilw-carousel--tabs--width: 32px;
+        --ilw-carousel--tabs--font: 700 1.188rem/1.5 var(--il-font-sans);
 
         --ilw-carousel--content-min-height: 130px;
 
@@ -16,7 +33,8 @@
         --ilw-carousel--button--focused-border-color: var(--il-blue);
         --ilw-carousel--button--active-color: var(--il-blue);
         --ilw-carousel--button--active-background-color: var(--il-orange);
-        --ilw-carousel--button--active-border-color: var(--il-blue)
+        --ilw-carousel--button--active-border-color: var(--il-blue);
+
     }
 }
 
@@ -73,8 +91,9 @@
 
 .control-position {
     position: absolute;
-    top: 510px;
-    height: 60px;
+    top: calc(var(--ilw-carousel--height));
+    padding-top: 10px;
+    height: var(--ilw-carousel--control--height);
     left: 0;
     right: 0;
     z-index: 1;
@@ -88,27 +107,26 @@
 }
 
 #progress-wrap {
-    width: 300px;
-    height: 10px;
+    width: var(--ilw-carousel--progress--width);
+    height: var(--ilw-carousel--progress--height);
     background: var(--il-blue);
 }
 #progress {
-    width: 32%;
-    height: 10px;
+    height: var(--ilw-carousel--progress--height);
     background: var(--il-orange);
 }
 
 .control-inner {
     display: flex;
     align-items: center;
-    column-gap: 10px;
-    margin-top: 10px;
+    column-gap: var(--ilw-carousel--tabs--column-gap);
+    margin-top: var(--ilw-carousel--tabs--margin-top);
 }
 
 #play-pause, .tabs > button, .previous-button, .next-button {
 
     background-color: var(--ilw-carousel--button--background-color);
-    border: 2px solid var(--ilw-carousel--button--border-color);
+    border: var(--ilw-carousel--button--border-width) solid var(--ilw-carousel--button--border-color);
     
     color: var(--ilw-carousel--button--foreground-color);
     cursor: pointer;
@@ -118,7 +136,7 @@
 
     &:visited {
         background-color: var(--ilw-carousel--button--background-color);
-        border: 2px solid var(--ilw-carousel--button--border-color);
+        border: var(--ilw-carousel--button--border-width) solid var(--ilw-carousel--button--border-color);
         color: var(--ilw-carousel--button--foreground-color);
     }
 
@@ -139,13 +157,13 @@
         background-color: var(--ilw-carousel--button--active-background-color);
         border-color: var(--ilw-carousel--button--active-border-color);
         color: var(--ilw-carousel--button--active-color);
-        outline: solid var(--ilw-carousel--button--active-border-color) 2px
+        outline: solid var(--ilw-carousel--button--active-border-color) var(--ilw-carousel--button--border-width)
     }
 }
 
 .previous-wrap, .next-wrap {
     position: absolute;
-    top: calc(500px/2 - 80px);
+    top: calc(var(--ilw-carousel--height)/2 - var(--ilw-carousel--prevnext--height)/2);
     z-index: 1;
 }
 .previous-wrap {
@@ -156,27 +174,27 @@
 }
 
 .previous-button, .next-button {
-    width: 44px;
-    height: 160px;
+    width: var(--ilw-carousel--prevntext--width);
+    height: var(--ilw-carousel--prevnext--height);
     line-height: 1;
     font-size: 1rem;
 }
 
 #play-pause {
-    height: 40px;
-    flex: 0 0 40px;
+    height: var(--ilw-carousel--play--height);
+    flex: 0 0 var(--ilw-carousel--play--height);
     box-sizing: border-box;
-    font: 400 1.8rem/1 var(--il-font-sans);
+    font: var(--ilw-carousel--play--font);
 }
 
 .tabs {
     display: flex;
-    column-gap: 10px;
+    column-gap: var(--ilw-carousel--tabs--column-gap);
 
     & > button {
-        width: 32px;
-        height: 32px;
-        font: 700 1.188rem/1.5 var(--il-font-sans);
+        width: var(--ilw-carousel--tabs--height);
+        height: var(--ilw-carousel--tabs--width);
+        font: var(--ilw-carousel--tabs--font);
 
         &.selected {
             background-color: var(--ilw-carousel--button--active-background-color);

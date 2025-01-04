@@ -11,10 +11,13 @@
 </head>
 
 <body style="margin: 0; padding: 0;">
-<ilw-carousel label="Selected natural scenes">
+<ilw-carousel label="Selected natural scenes" height="400px" overlay>
     <ilw-slide>
         <h3>Northern Lights</h3>
         <p>Also known as <a href="#">aurora borealis</a>, they illuminate the sky.</p>
+        <div class="ilw-buttons" slot="buttons">
+            <button class="ilw-button">Explore Illinois</button>
+        </div>
         <img src="https://fastly.picsum.photos/id/724/1920/768.jpg?hmac=oaOY1Ja3q32qdCoUGuVXUNvp6bQq3WSNi1Fbp6KbmAc"
              alt="Red and green lights in the night sky with evergreen trees in the foreground."
              slot="image">
@@ -37,7 +40,7 @@
 </ilw-carousel>
 
 <div style="max-width: 900px; margin: 0 auto">
-<ilw-carousel width="full">
+<ilw-carousel width="full" overlay>
     <ilw-slide>
         <img src="https://fastly.picsum.photos/id/701/1920/768.jpg?hmac=CO7UTJncYibcckG8WC6NI4QGf0ZRd7bXwmukliNyYDc"
              alt="Close-up photo of a field of blue flowers."

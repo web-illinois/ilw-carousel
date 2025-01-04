@@ -1,5 +1,56 @@
+:root {
+}
+
 ilw-carousel {
     background: #aaaaaa;
 
     font-family: var(--il-font-sans);
+}
+
+ilw-slide {
+    h1, h2, h3 {
+        all: initial;
+        font: var(--ilw-slide--font);
+        text-align: inherit;
+        margin-bottom: 0;
+    }
+
+    p {
+        font: var(--ilw-slide--paragraph-font);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    ilw-carousel[overlay] {
+
+        ilw-slide {
+            h1, h2, h3 {
+                all: initial;
+                font: var(--ilw-slide--overlay--font);
+                color: var(--ilw-slide--overlay--text-color);
+                text-shadow: 2px 2px 2px var(--ilw-slide--shadow-color);
+                text-align: inherit;
+                margin-bottom: 0;
+            }
+
+            p {
+                font: var(--ilw-slide--overlay--paragraph-font);
+                margin-bottom: 0;
+                color: var(--ilw-slide--overlay--text-color);
+            }
+
+            a {
+                color: var(--ilw-slide--overlay--text-color);
+
+                &:hover {
+                    color: var(--il-orange);
+                }
+
+                &:focus {
+                    color: var(--il-blue);
+                    background: var(--ilw-link--focus-background-color)
+                }
+            }
+        }
+    }
 }

@@ -1,9 +1,26 @@
-/* Styleable variables are in the base layer so they can be overridden easily */
+
+:root {
+}
+
 @layer base {
     :host {
+        --ilw-slide--font: 700 2rem/1.3 var(--il-font-sans);
+        --ilw-slide--paragraph-font: 500 1.125rem/1.5 var(--il-font-sans);
+        --ilw-slide--text-color: #000;
+        --ilw-slide--overlay--text-color: white;
         --ilw-slide--background: #fff;
+        --ilw-slide--content-width: 500px;
+        --ilw-slide--content-extra-padding: 30px;
+
+        --ilw-slide--overlay--padding: 1.5rem;
+        --ilw-slide--overlay--left: 8vw;
+        --ilw-slide--overlay--font: 700 2.25rem/1 var(--il-font-sans);
+        --ilw-slide--overlay--background: radial-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.51));
+        --ilw-slide--shadow-color: rgba(0, 0, 0, 1);
+        --ilw-slide--overlay--paragraph-font: 500 1.25rem/1.5 var(--il-font-sans);
     }
 }
+
 
 :host {
     display: block;
@@ -14,7 +31,7 @@
 .image {
     ::slotted(img) {
         width: 100%;
-        height: 500px;
+        height: var(--ilw-carousel--height);
         object-fit: cover;
         display: block;
     }
@@ -24,14 +41,43 @@
     display: flex;
     flex-direction: column-reverse;
     background: var(--ilw-slide--background);
+    position: relative;
 }
 
 .content-wrap {
     display: flex;
     justify-content: center;
-    padding: 60px var(--ilw-margin--side) 1rem;
+    flex-wrap: wrap;
+    padding: calc(var(--ilw-carousel--control--height) + var(--ilw-slide--content-extra-padding)) 1rem 1rem;
+}
+
+.single .content-wrap {
+    padding-top: 1rem;
 }
 
 .content {
-    flex: 0 1 600px;
+    flex: 0 1 var(--ilw-slide--content-width);
+    max-width: var(--ilw-slide--content-width);
 }
+@media screen and (min-width: 768px) {
+    .overlay {
+        padding-bottom: var(--ilw-carousel--control--height);
+
+        .content-wrap {
+            padding: 0;
+            position: absolute;
+            display: block;
+            left: var(--ilw-slide--overlay--left);
+            top: calc(var(--ilw-carousel--height) / 6);
+        }
+    }
+
+    .single.overlay {
+        padding-bottom: 0;
+    }
+    .overlay .content {
+        background: var(--ilw-slide--overlay--background);
+        padding: var(--ilw-slide--overlay--padding);
+    }
+}
+

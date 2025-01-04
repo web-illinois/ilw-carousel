@@ -25,7 +25,7 @@ ways of interaction:
 Additionally, there is a visual progress bar showing how soon the next slide will appear. This keeps the user
 informed of the carousel's behavior, making it easier to understand.
 
-There are a few attributes to control `ilw-carousel`:
+The following attributes can control `ilw-carousel`:
 
 - `playing="true"` or `playing="false"` controls if the carousel should autoplay. Note that users who
   have `prefers-reduced-motion` configured, the carousel will never autoplay.
@@ -33,11 +33,19 @@ There are a few attributes to control `ilw-carousel`:
 - `active-slide` can be set to control which slide is shown initially.
 - `label` for the accessible name of the carousel, and should describe what kinds of items the carousel has.
   This defaults to "Highlighted content", but setting a more specific one is highly recommended.
+- `width="full"` will make the carousel expand horizontally to fill the viewport.
+- `height` takes a CSS value for the height of the carousel images. Defaults to `500px`.
+- `overlay` moves the text content to be overlaid on top of the image.
 
 Both `playing` and `active-slide` are fully reactive, so the HTML attribute updates when the state of the
 carousel changes internally.
 
+## Slots
+
 The image is set using the `slot="image"` on an `<img>` element.
+
+Buttons can be added below the content with `slot="buttons"`, which will be shown below the
+black box in overlay mode.
 
 ## Code Examples
 

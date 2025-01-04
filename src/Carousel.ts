@@ -8,6 +8,8 @@ import { ManualSlotController } from "./util/ManualSlotController";
 import { classMap } from "lit/directives/class-map.js";
 import "@illinois-toolkit/ilw-icon";
 import Slide from "./Slide";
+import { styleMap } from "lit/directives/style-map.js";
+import {booleanConverter} from "./util/converters";
 
 @customElement("ilw-carousel")
 export default class Carousel extends LitElement {
@@ -31,10 +33,7 @@ export default class Carousel extends LitElement {
     @property({
         reflect: true,
         type: Boolean,
-        converter: {
-            fromAttribute: (value) => value && value !== "false",
-            toAttribute: (value) => (value ? "true" : "false"),
-        },
+        converter: booleanConverter,
     })
     playing = true;
 
@@ -52,6 +51,12 @@ export default class Carousel extends LitElement {
 
     @property()
     width: "" | "full" = "";
+
+    @property()
+    height = "500px";
+
+    @property({type: Boolean})
+    overlay = false;
 
     // Not in state, we don't want these to be reactive. They're used in the animation
     // and don't affect the render function.
@@ -293,6 +298,10 @@ export default class Carousel extends LitElement {
         const active = this.activeSlide; // activeSlide is 1-based
         const { prev, next } = this.determinePrevNext(count, active);
 
+        for (let slide of this.children) {
+            slide.setAttribute("overlay", this.overlay ? "true" : "false");
+        }
+
         for (let i = 1; i <= count; i++) {
             // Lambda function that keeps the index in scope for each tab.
             // Note the tabindex value - it's -1 for all tabs except the active one, which makes the
@@ -344,9 +353,13 @@ export default class Carousel extends LitElement {
             "carousel-inner": true,
             fixed: this.width === "full",
         };
+        const style = {
+            "--ilw-carousel--height": this.height,
+        };
 
         return html`
             <section
+                style=${styleMap(style)}
                 class=${classMap(classes)}
                 aria-roledescription="carousel"
                 aria-label=${this.label}
@@ -366,7 +379,9 @@ export default class Carousel extends LitElement {
                                 @click=${this.togglePlay}
                                 @focusin=${this.onTabFocus}
                                 @focusout=${this.offTabFocus}
-                            >${this.playing ? "⏸" : "⏵"}</button>
+                            >
+                                ${this.playing ? "⏸" : "⏵"}
+                            </button>
                             <div class="tabs" role="tablist" aria-label="Slide Selector">${tabs}</div>
                         </div>
                     </div>
@@ -403,12 +418,18 @@ export default class Carousel extends LitElement {
     }
 
     protected renderOne(items: TemplateResult[]) {
+        for (let slide of this.children) {
+            slide.setAttribute("single", "true");
+        }
         const classes = {
             "carousel-inner-single": true,
             fixed: this.width === "full",
         };
+        const style = {
+            "--ilw-carousel--height": this.height,
+        };
         return html`
-            <div class=${classMap(classes)}>
+            <div class=${classMap(classes)} style=${styleMap(style)}>
                 <div id="carousel-items">
                     <slot></slot>
                 </div>
