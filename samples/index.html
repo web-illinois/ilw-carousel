@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Carousel Component</title>
     <link rel="stylesheet" href="https://cdn.brand.illinois.edu/illinois.css">
-    <link rel="stylesheet" href="https://dev.toolkit.illinois.edu/ilw-global/3.0.0-alpha/ilw-global.css">
+    <link rel="stylesheet" href="https://cdn.toolkit.illinois.edu/ilw-global/3/ilw-global.css">
     <script type="module" src="/src/ilw-carousel.ts"></script>
 </head>
 
@@ -36,18 +36,17 @@
     </ilw-slide>
 </ilw-carousel>
 
-<ilw-carousel>
-
+<div style="max-width: 900px; margin: 0 auto">
+<ilw-carousel width="full">
     <ilw-slide>
         <img src="https://fastly.picsum.photos/id/701/1920/768.jpg?hmac=CO7UTJncYibcckG8WC6NI4QGf0ZRd7bXwmukliNyYDc"
              alt="Close-up photo of a field of blue flowers."
              slot="image">
-        <div slot="content">
-            <h3>Blue Flowers</h3>
-            <p>Clusters of blue flowers with vivid colors.</p>
-        </div>
+        <h3>Blue Flowers</h3>
+        <p>Clusters of blue flowers with vivid colors.</p>
     </ilw-slide>
 </ilw-carousel>
+</div>
 </body>
 
 </html>

@@ -3,10 +3,11 @@ import { LitElement, html, unsafeCSS, TemplateResult, nothing, PropertyValues } 
 import styles from "./Carousel.styles.css?inline";
 // @ts-ignore
 import "./ilw-carousel.css";
-import { customElement, property, query, queryAll, state } from "lit/decorators.js";
+import { customElement, property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
 import { ManualSlotController } from "./util/ManualSlotController";
 import { classMap } from "lit/directives/class-map.js";
 import "@illinois-toolkit/ilw-icon";
+import Slide from "./Slide";
 
 @customElement("ilw-carousel")
 export default class Carousel extends LitElement {
@@ -32,7 +33,7 @@ export default class Carousel extends LitElement {
         type: Boolean,
         converter: {
             fromAttribute: (value) => value && value !== "false",
-            toAttribute: value => value ? "true" : "false"
+            toAttribute: (value) => (value ? "true" : "false"),
         },
     })
     playing = true;
@@ -47,7 +48,10 @@ export default class Carousel extends LitElement {
      * 1-based active slide.
      */
     @property({ type: Number, reflect: true, attribute: "active-slide" })
-    private activeSlide = 1;
+    activeSlide = 1;
+
+    @property()
+    width: "" | "full" = "";
 
     // Not in state, we don't want these to be reactive. They're used in the animation
     // and don't affect the render function.
@@ -272,6 +276,7 @@ export default class Carousel extends LitElement {
     }
 
     protected updated(changedProperties: PropertyValues) {
+        console.log(changedProperties);
         super.updated(changedProperties);
 
         // Listen to focus events on links inside the carousel content so we can pause progress
@@ -301,6 +306,7 @@ export default class Carousel extends LitElement {
                     aria-label="Slide ${i}"
                     aria-controls="slide-${i}"
                     aria-selected=${i === active}
+                    class=${i === active ? "selected" : nothing}
                     tabindex=${i === active ? nothing : "-1"}
                     @click=${activateSlide}
                     @focusin=${this.onTabFocus}
@@ -334,11 +340,18 @@ export default class Carousel extends LitElement {
             return this.renderOne(items);
         }
 
+        const classes = {
+            "carousel-inner": true,
+            fixed: this.width === "full",
+        };
+
         return html`
-            <section class="carousel-inner"
-                     aria-roledescription="carousel"
-                     aria-label=${this.label}
-                     @mouseover=${this.mouseOver} @mouseout=${this.mouseOut}
+            <section
+                class=${classMap(classes)}
+                aria-roledescription="carousel"
+                aria-label=${this.label}
+                @mouseover=${this.mouseOver}
+                @mouseout=${this.mouseOut}
             >
                 <div class="control-position">
                     <div class="control">
@@ -353,9 +366,7 @@ export default class Carousel extends LitElement {
                                 @click=${this.togglePlay}
                                 @focusin=${this.onTabFocus}
                                 @focusout=${this.offTabFocus}
-                            >
-                                ${this.playing ? "⏸" : "⏵"}
-                            </button>
+                            >${this.playing ? "⏸" : "⏵"}</button>
                             <div class="tabs" role="tablist" aria-label="Slide Selector">${tabs}</div>
                         </div>
                     </div>
@@ -363,7 +374,7 @@ export default class Carousel extends LitElement {
                 <div class="previous-wrap">
                     <button
                         type="button"
-                        class="previous"
+                        class="previous-button"
                         aria-label="Previous Slide"
                         aria-controls="carousel-items"
                         @click=${this.previousClick}
@@ -376,7 +387,7 @@ export default class Carousel extends LitElement {
                 <div class="next-wrap">
                     <button
                         type="button"
-                        class="next"
+                        class="next-button"
                         aria-label="Next Slide"
                         aria-controls="carousel-items"
                         @click=${this.nextClick}
@@ -392,8 +403,12 @@ export default class Carousel extends LitElement {
     }
 
     protected renderOne(items: TemplateResult[]) {
+        const classes = {
+            "carousel-inner-single": true,
+            fixed: this.width === "full",
+        };
         return html`
-            <div class="carousel-inner-single">
+            <div class=${classMap(classes)}>
                 <div id="carousel-items">
                     <slot></slot>
                 </div>
