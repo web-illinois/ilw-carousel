@@ -1,6 +1,3 @@
-:root {
-}
-
 /* Styleable variables are in the base layer so they can be overridden easily */
 @layer base {
     :host {
@@ -12,11 +9,12 @@
         --ilw-carousel--control--background: var(--il-storm-lighter-4);
         --ilw-carousel--progress--width: 300px;
         --ilw-carousel--progress--height: 10px;
+        --ilw-carousel--progress--background: var(--il-blue);
+        --ilw-carousel--progress--foreground: var(--il-orange);
+
         --ilw-carousel--tabs--column-gap: 10px;
         --ilw-carousel--tabs--margin-top: 10px;
-        --ilw-carousel--button--border-width: 2px;
-        --ilw-carousel--prevnext--height: 160px;
-        --ilw-carousel--prevntext--width: 44px;
+
         --ilw-carousel--play--height: 40px;
         --ilw-carousel--play--font: 400 1.8rem/1 var(--il-font-sans);
         --ilw-carousel--tabs--height: 32px;
@@ -25,6 +23,7 @@
 
         --ilw-carousel--content-min-height: 130px;
 
+        --ilw-carousel--button--border-width: 2px;
         --ilw-carousel--button--background-color: var(--il-blue);
         --ilw-carousel--button--foreground-color: #fff;
         --ilw-carousel--button--border-color: var(--il-blue);
@@ -35,6 +34,14 @@
         --ilw-carousel--button--active-background-color: var(--il-orange);
         --ilw-carousel--button--active-border-color: var(--il-blue);
 
+        --ilw-carousel--prevnext--height: 160px;
+        --ilw-carousel--prevnext--width: 44px;
+        --ilw-carousel--prevnext--background: var(--ilw-carousel--button--background-color);
+        --ilw-carousel--prevnext--foreground: var(--ilw-carousel--button--foreground-color);
+        --ilw-carousel--prevnext--border-width: var(--ilw-carousel--button--border-width);
+        --ilw-carousel--prevnext--border-color: var(--ilw-carousel--button--border-color);
+        --ilw-carousel--prevnext--line-height: 1;
+        --ilw-carousel--prevnext--font-size: 1rem;
     }
 }
 
@@ -109,11 +116,11 @@
 #progress-wrap {
     width: var(--ilw-carousel--progress--width);
     height: var(--ilw-carousel--progress--height);
-    background: var(--il-blue);
+    background: var(--ilw-carousel--progress--background);
 }
 #progress {
     height: var(--ilw-carousel--progress--height);
-    background: var(--il-orange);
+    background: var(--ilw-carousel--progress--foreground);
 }
 
 .control-inner {
@@ -174,10 +181,15 @@
 }
 
 .previous-button, .next-button {
-    width: var(--ilw-carousel--prevntext--width);
+    width: var(--ilw-carousel--prevnext--width);
     height: var(--ilw-carousel--prevnext--height);
-    line-height: 1;
-    font-size: 1rem;
+
+    background-color: var(--ilw-carousel--prevnext--background);
+    border: var(--ilw-carousel--prevnext--border-width) solid var(--ilw-carousel--prevnext--border-color);
+
+    color: var(--ilw-carousel--prevnext--foreground);
+    line-height: var(--ilw-carousel--prevnext--line-height);
+    font-size: var(--ilw-carousel--prevnext--font-size);
 }
 
 #play-pause {
@@ -200,6 +212,13 @@
             background-color: var(--ilw-carousel--button--active-background-color);
             border-color: var(--ilw-carousel--button--active-border-color);
             color: var(--ilw-carousel--button--active-color);
+
+            &:focus {
+                background-color: var(--ilw-link--focus-background-color);
+                border-color: var(--ilw-link--focus-color);
+                color: var(--ilw-link--focus-color);
+                outline: var(--ilw-link--focus-outline)
+            }
         }
     }
 }

@@ -8,7 +8,9 @@ ilw-carousel {
 }
 
 ilw-slide {
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
         all: initial;
         font: var(--ilw-slide--font);
         text-align: inherit;
@@ -22,9 +24,10 @@ ilw-slide {
 
 @media screen and (min-width: 768px) {
     ilw-carousel[overlay] {
-
         ilw-slide {
-            h1, h2, h3 {
+            h1,
+            h2,
+            h3 {
                 all: initial;
                 font: var(--ilw-slide--overlay--font);
                 color: var(--ilw-slide--overlay--text-color);
@@ -39,7 +42,7 @@ ilw-slide {
                 color: var(--ilw-slide--overlay--text-color);
             }
 
-            a {
+            a:not([slot="buttons"] a) {
                 color: var(--ilw-slide--overlay--text-color);
 
                 &:hover {
@@ -48,7 +51,7 @@ ilw-slide {
 
                 &:focus {
                     color: var(--il-blue);
-                    background: var(--ilw-link--focus-background-color)
+                    background: var(--ilw-link--focus-background-color);
                 }
             }
         }
