@@ -3,11 +3,10 @@ import { LitElement, html, unsafeCSS, TemplateResult, nothing, PropertyValues } 
 import styles from "./Carousel.styles.css?inline";
 // @ts-ignore
 import "./ilw-carousel.css";
-import { customElement, property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
+import { customElement, property, query, queryAll } from "lit/decorators.js";
 import { ManualSlotController } from "./util/ManualSlotController";
 import { classMap } from "lit/directives/class-map.js";
 import "@illinois-toolkit/ilw-icon";
-import Slide from "./Slide";
 import { styleMap } from "lit/directives/style-map.js";
 import {booleanConverter} from "./util/converters";
 
@@ -46,8 +45,8 @@ export default class Carousel extends LitElement {
     /**
      * 1-based active slide.
      */
-    @property({ type: Number, reflect: true, attribute: "active-slide" })
-    activeSlide = 1;
+    @property({ type: Number, reflect: true })
+    activeslide = 1;
 
     @property()
     width: "" | "full" = "";
@@ -106,14 +105,14 @@ export default class Carousel extends LitElement {
      * Advance the carousel to the next slide.
      */
     public next() {
-        this.activeSlide = this.activeSlide === this.children.length ? 1 : this.activeSlide + 1;
+        this.activeslide = this.activeslide === this.children.length ? 1 : this.activeslide + 1;
     }
 
     /**
      * Back the carousel to the previous slide.
      */
     public previous() {
-        this.activeSlide = this.activeSlide === 1 ? this.children.length : this.activeSlide - 1;
+        this.activeslide = this.activeslide === 1 ? this.children.length : this.activeslide - 1;
     }
 
     /**
@@ -125,7 +124,7 @@ export default class Carousel extends LitElement {
         if (slide < 1 || slide > this.children.length) {
             throw new Error("ilw-carousel: attempted to set invalid slide: " + slide);
         }
-        this.activeSlide = slide;
+        this.activeslide = slide;
         this.playing = false;
     }
 
@@ -217,7 +216,7 @@ export default class Carousel extends LitElement {
 
         if (flag) {
             // We need to also move the focus, since it doesn't move automatically
-            this.tabs[this.activeSlide - 1].focus();
+            this.tabs[this.activeslide - 1].focus();
             event.stopPropagation();
             event.preventDefault();
         }
@@ -295,7 +294,7 @@ export default class Carousel extends LitElement {
         let count = this.children.length;
         const tabs: TemplateResult[] = [];
         const items: TemplateResult[] = [];
-        const active = this.activeSlide; // activeSlide is 1-based
+        const active = this.activeslide; // activeSlide is 1-based
         const { prev, next } = this.determinePrevNext(count, active);
 
         for (let slide of this.children) {
