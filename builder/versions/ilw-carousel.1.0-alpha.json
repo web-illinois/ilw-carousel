@@ -5,6 +5,7 @@
     "type": "web component",
     "element-name": "ilw-carousel",
     "description": "Changing slides with images and text.",
+    "builder-version": "1.0-alpha",
     "version": "1.0.0-alpha",
     "date": "11/17/2024",
     "css": "https://dev.toolkit.illinois.edu/ilw-carousel/1.0.0-alpha/ilw-carousel.css",
