@@ -21,20 +21,7 @@
         }
     ],
     "attributes-fixed": [],
-    "attributes-text": [],
-    "attributes": [
-        {
-            "name": "theme",
-            "description": "Color theme used",
-            "depreciated": false,
-            "values": ["", "blue"]
-        },
-        {
-            "name": "playing",
-            "description": "If the carousel should autoplay on load.",
-            "depreciated": false,
-            "values": ["", "true", "false"]
-        },
+    "attributes-text": [
         {
             "name": "time",
             "description": "Time in seconds for each slide, defaults to 10.",
@@ -49,9 +36,29 @@
         },
         {
             "name": "label",
-            "description": "Accessible name for the whole carousel. Defaults to \"Highlighted Content \".",
+            "description": "Accessible name for the whole carousel. Defaults to \"Highlighted Content\".",
             "depreciated": false,
             "value": ""
+        },
+        {
+            "name": "height",
+            "description": "CSS height for the carousel images. Defaults to 500px.",
+            "depreciated": false,
+            "value": ""
+        }
+    ],
+    "attributes": [
+        {
+            "name": "theme",
+            "description": "Color theme used",
+            "depreciated": false,
+            "values": ["", "blue"]
+        },
+        {
+            "name": "playing",
+            "description": "If the carousel should autoplay on load.",
+            "depreciated": false,
+            "values": ["", "true", "false"]
         },
         {
             "name": "width",
@@ -61,12 +68,6 @@
                 "",
                 "full"
             ]
-        },
-        {
-            "name": "height",
-            "description": "CSS height for the carousel images. Defaults to 500px.",
-            "depreciated": false,
-            "value": ""
         },
         {
             "name": "overlay",
