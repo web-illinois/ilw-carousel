@@ -15,7 +15,7 @@
         --ilw-slide--overlay--padding: 1.5rem;
         --ilw-slide--overlay--left: 8vw;
         --ilw-slide--overlay--font: 700 2.25rem/1 var(--il-font-sans);
-        --ilw-slide--overlay--background: radial-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.51));
+        --ilw-slide--overlay--background: radial-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.35));
         --ilw-slide--shadow-color: rgba(0, 0, 0, 1);
         --ilw-slide--overlay--paragraph-font: 500 1.25rem/1.5 var(--il-font-sans);
     }

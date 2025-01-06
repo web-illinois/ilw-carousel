@@ -45,9 +45,28 @@
     }
 }
 
+:host([theme="blue"]) {
+    --ilw-carousel--control--background: var(--il-blue);
+    --ilw-carousel--progress--background: #fff;
+    --ilw-carousel--button--background-color: #fff;
+    --ilw-carousel--button--foreground-color: var(--il-blue);
+    --ilw-carousel--button--border-color: #fff;
+    --ilw-carousel--button--focused-background-color: var(--il-blue);
+    --ilw-carousel--button--focused-foreground-color: #fff;
+    --ilw-carousel--button--focused-border-color: #fff;
+    --ilw-carousel--button--active-color: var(--il-blue);
+    --ilw-carousel--button--active-background-color: var(--il-orange);
+    --ilw-carousel--button--active-border-color: var(--il-orange);
+
+    --ilw-carousel--prevnext--background: var(--il-blue);
+    --ilw-carousel--prevnext--foreground: #fff;
+    --ilw-carousel--prevnext--border-color: var(--il-blue);
+}
+
 :host {
     display: block;
     container-type: inline-size;
+    contain: layout;
     font-family: var(--ilw-carousel--font);
 }
 

@@ -36,6 +36,7 @@ The following attributes can control `ilw-carousel`:
 - `width="full"` will make the carousel expand horizontally to fill the viewport.
 - `height` takes a CSS value for the height of the carousel images. Defaults to `500px`.
 - `overlay` moves the text content to be overlaid on top of the image.
+- `theme="blue"` makes the controls have a blue background.
 
 Both `playing` and `active-slide` are fully reactive, so the HTML attribute updates when the state of the
 carousel changes internally.
