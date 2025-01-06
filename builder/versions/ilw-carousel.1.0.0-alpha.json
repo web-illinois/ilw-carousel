@@ -4,7 +4,7 @@
     "github": "https://github.com/web-illinois/ilw-carousel/",
     "type": "web component",
     "element-name": "ilw-carousel",
-    "description": "Description for builder.",
+    "description": "Changing slides with images and text.",
     "version": "1.0.0-alpha",
     "date": "11/17/2024",
     "css": "https://dev.toolkit.illinois.edu/ilw-carousel/1.0.0-alpha/ilw-carousel.css",
@@ -16,7 +16,7 @@
         {
             "name": "default",
             "description": "Default information",
-            "text": "<p>Lorem ipsum</p>"
+            "text": "<ilw-slide>\n    <h3>Northern Lights</h3>\n    <p>Also known as <a href=\"#\">aurora borealis</a>, they illuminate the sky.</p>\n    <div class=\"ilw-buttons\" slot=\"buttons\">\n        <button class=\"ilw-button\">Explore Illinois</button>\n    </div>\n    <img src=\"https://fastly.picsum.photos/id/724/1920/768.jpg?hmac=oaOY1Ja3q32qdCoUGuVXUNvp6bQq3WSNi1Fbp6KbmAc\"\n         alt=\"Red and green lights in the night sky with evergreen trees in the foreground.\"\n         slot=\"image\">\n</ilw-slide>\n<ilw-slide>\n    <h3>Tundra</h3>\n    <p>Tundra is a type of biome where tree growth is hindered by frigid temperatures and short growing\n        seasons.</p>\n    <img src=\"https://fastly.picsum.photos/id/547/1920/768.jpg?hmac=QK_aYd-IVY12I8ZvvuSMbzgFNFxaXGLobEAeaPLTQEA\"\n         alt=\"Landscape photo of wooded hills with patches of snow, and mountains in the distance.\"\n         slot=\"image\">\n</ilw-slide>\n<ilw-slide>\n    <h3>Blue Flowers</h3>\n    <p>Clusters of blue flowers with vivid colors.</p>\n    <img src=\"https://fastly.picsum.photos/id/701/1920/768.jpg?hmac=CO7UTJncYibcckG8WC6NI4QGf0ZRd7bXwmukliNyYDc\"\n         alt=\"Close-up photo of a field of blue flowers.\"\n         slot=\"image\">\n</ilw-slide>"
         }
     ],
     "attributes-fixed": [],
@@ -26,16 +26,229 @@
             "name": "theme",
             "description": "Color theme used",
             "depreciated": false,
+            "values": ["", "blue"]
+        },
+        {
+            "name": "playing",
+            "description": "If the carousel should autoplay on load.",
+            "depreciated": false,
+            "values": ["", "true", "false"]
+        },
+        {
+            "name": "time",
+            "description": "Time in seconds for each slide, defaults to 10.",
+            "depreciated": false,
+            "value": ""
+        },
+        {
+            "name": "activeslide",
+            "description": "Set the actively shown slide.",
+            "depreciated": false,
+            "value": ""
+        },
+        {
+            "name": "label",
+            "description": "Accessible name for the whole carousel. Defaults to \"Highlighted Content \".",
+            "depreciated": false,
+            "value": ""
+        },
+        {
+            "name": "width",
+            "description": "Make the component expand to full width even inside a container",
+            "depreciated": false,
             "values": [
                 "",
-                "blue",
-                "orange",
-                "white"
+                "full"
+            ]
+        },
+        {
+            "name": "height",
+            "description": "CSS height for the carousel images. Defaults to 500px.",
+            "depreciated": false,
+            "value": ""
+        },
+        {
+            "name": "overlay",
+            "description": "Move the text content to be over the image on wider viewports",
+            "depreciated": false,
+            "values": [
+                "",
+                "true"
             ]
         }
     ],
     "classes-fixed": [],
     "classes": [],
     "css-variables": [
+        {
+            "name": "--ilw-carousel--font",
+            "depreciated": false,
+            "description": "Font for the carousel text content [default: var(--il-font-sans)]"
+        },
+        {
+            "name": "--ilw-carousel--height",
+            "depreciated": false,
+            "description": "Carousel image height [default: 500px]"
+        },
+        {
+            "name": "--ilw-carousel--background",
+            "depreciated": false,
+            "description": "Background behind the carousel [default: #fff]"
+        },
+        {
+            "name": "--ilw-carousel--control--height",
+            "depreciated": false,
+            "description": "Height of the controls area [default: 80px]"
+        },
+        {
+            "name": "--ilw-carousel--control--background",
+            "depreciated": false,
+            "description": "Background of the controls area [default: var(--il-storm-lighter-4)]"
+        },
+        {
+            "name": "--ilw-carousel--progress--width",
+            "depreciated": false,
+            "description": "Width of the progress bar  [default: 300px]"
+        },
+        {
+            "name": "--ilw-carousel--progress--height",
+            "depreciated": false,
+            "description": "Height of the progress bar [default: 10px]"
+        },
+        {
+            "name": "--ilw-carousel--progress--background",
+            "depreciated": false,
+            "description": "Progress bar base color [default: var(--il-blue)]"
+        },
+        {
+            "name": "--ilw-carousel--progress--foreground",
+            "depreciated": false,
+            "description": "Color of the progress [default: var(--il-orange)]"
+        },
+        {
+            "name": "--ilw-carousel--tabs--column-gap",
+            "depreciated": false,
+            "description": "Spacing between slide number tabs [default: 10px]"
+        },
+        {
+            "name": "--ilw-carousel--tabs--margin-top",
+            "depreciated": false,
+            "description": "Spacing above slide number tabs [default: 10px]"
+        },
+        {
+            "name": "--ilw-carousel--play--height",
+            "depreciated": false,
+            "description": "Play button height [default: 40px]"
+        },
+        {
+            "name": "--ilw-carousel--play--font",
+            "depreciated": false,
+            "description": "Play button font [default: 400 1.8rem/1 var(--il-font-sans)]"
+        },
+        {
+            "name": "--ilw-carousel--tabs--height",
+            "depreciated": false,
+            "description": "Slide number tab height [default: 32px]"
+        },
+        {
+            "name": "--ilw-carousel--tabs--width",
+            "depreciated": false,
+            "description": "Slide number tab width [default: 32px]"
+        },
+        {
+            "name": "--ilw-carousel--tabs--font",
+            "depreciated": false,
+            "description": "Slide number tab font [default: 700 1.188rem/1.5 var(--il-font-sans)]"
+        },
+        {
+            "name": "--ilw-carousel--button--border-width",
+            "depreciated": false,
+            "description": "Control buttons border width [default: 2px]"
+        },
+        {
+            "name": "--ilw-carousel--button--background-color",
+            "depreciated": false,
+            "description": "Control buttons background color [default: var(--il-blue)]"
+        },
+        {
+            "name": "--ilw-carousel--button--foreground-color",
+            "depreciated": false,
+            "description": "Control buttons foreground color [default: #fff]"
+        },
+        {
+            "name": "--ilw-carousel--button--border-color",
+            "depreciated": false,
+            "description": "Control buttons border color [default: var(--il-blue)]"
+        },
+        {
+            "name": "--ilw-carousel--button--focused-background-color",
+            "depreciated": false,
+            "description": "Control buttons hover background color [default: #fff]"
+        },
+        {
+            "name": "--ilw-carousel--button--focused-foreground-color",
+            "depreciated": false,
+            "description": "Control buttons hover foreground color [default: var(--il-blue)]"
+        },
+        {
+            "name": "--ilw-carousel--button--focused-border-color",
+            "depreciated": false,
+            "description": "Control buttons hover border color [default: var(--il-blue)]"
+        },
+        {
+            "name": "--ilw-carousel--button--active-background-color",
+            "depreciated": false,
+            "description": "Control buttons active background color [default: var(--il-orange)]"
+        },
+        {
+            "name": "--ilw-carousel--button--active-color",
+            "depreciated": false,
+            "description": "Control buttons active foreground color [default: var(--il-blue)]"
+        },
+        {
+            "name": "--ilw-carousel--button--active-border-color",
+            "depreciated": false,
+            "description": "Control buttons active border color [default: var(--il-blue)]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--height",
+            "depreciated": false,
+            "description": "Height of the previous/next buttons [default: 160px]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--width",
+            "depreciated": false,
+            "description": "Width of the previous/next buttons [default: 44px]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--background",
+            "depreciated": false,
+            "description": "Background of the previous/next buttons [default: var(--ilw-carousel--button--background-color)]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--foreground",
+            "depreciated": false,
+            "description": "Fireground of the previous/next buttons [default: var(--ilw-carousel--button--foreground-color)]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--border-width",
+            "depreciated": false,
+            "description": "Border width of the previous/next buttons [default: var(--ilw-carousel--button--border-width)]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--border-color",
+            "depreciated": false,
+            "description": "Border color of the previous/next buttons [default: var(--ilw-carousel--button--border-color)]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--line-height",
+            "depreciated": false,
+            "description": "Line height of the previous/next buttons  [default: 1]"
+        },
+        {
+            "name": "--ilw-carousel--prevnext--font-size",
+            "depreciated": false,
+            "description": "Font size of the previous/next buttons  [default: 1rem]"
+        }
     ]
 }

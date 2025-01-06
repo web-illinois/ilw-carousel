@@ -34,9 +34,10 @@
         "@illinois-toolkit/ilw-icon": "^1.0.0"
     },
     "devDependencies": {
-        "prettier": "^3.3.3",
-        "typescript": "^5.6.3",
+        "prettier": "^3.4.2",
+        "typescript": "^5.7.2",
         "vite": "^5.4.11",
-        "vite-plugin-dts": "^4.3.0"
+        "vite-plugin-dts": "^4.3.0",
+        "@types/node": "^22.10.5"
     }
 }

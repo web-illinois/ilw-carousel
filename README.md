@@ -30,7 +30,7 @@ The following attributes can control `ilw-carousel`:
 - `playing="true"` or `playing="false"` controls if the carousel should autoplay. Note that users who
   have `prefers-reduced-motion` configured, the carousel will never autoplay.
 - `time` in seconds for how long autoplay takes per slide.
-- `active-slide` can be set to control which slide is shown initially.
+- `activeslide` can be set to control which slide is shown initially.
 - `label` for the accessible name of the carousel, and should describe what kinds of items the carousel has.
   This defaults to "Highlighted content", but setting a more specific one is highly recommended.
 - `width="full"` will make the carousel expand horizontally to fill the viewport.
@@ -38,7 +38,7 @@ The following attributes can control `ilw-carousel`:
 - `overlay` moves the text content to be overlaid on top of the image.
 - `theme="blue"` makes the controls have a blue background.
 
-Both `playing` and `active-slide` are fully reactive, so the HTML attribute updates when the state of the
+Both `playing` and `activeslide` are fully reactive, so the HTML attribute updates when the state of the
 carousel changes internally.
 
 ## Slots
@@ -55,6 +55,9 @@ black box in overlay mode.
   <ilw-slide>
     <h3>Northern Lights</h3>
     <p>Also known as <a href="#">aurora borealis</a>, they illuminate the sky.</p>
+    <div class="ilw-buttons" slot="buttons">
+      <button class="ilw-button">Learn More</button>
+    </div>
     <img src="https://fastly.picsum.photos/id/724/1920/768.jpg?hmac=oaOY1Ja3q32qdCoUGuVXUNvp6bQq3WSNi1Fbp6KbmAc"
          alt="Red and green lights in the night sky with evergreen trees in the foreground."
          slot="image">
