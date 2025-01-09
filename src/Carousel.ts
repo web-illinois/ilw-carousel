@@ -299,6 +299,7 @@ export default class Carousel extends LitElement {
 
         for (let slide of this.children) {
             slide.setAttribute("overlay", this.overlay ? "true" : "false");
+            slide.removeAttribute("single");
         }
 
         for (let i = 1; i <= count; i++) {
