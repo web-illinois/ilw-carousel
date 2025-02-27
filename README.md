@@ -6,6 +6,15 @@ Links: **[ilw-carousel in Builder](https://builder3.toolkit.illinois.edu/compone
 
 ## Overview
 
+TODO:
+
+- Use labels instead of aria-live
+  - Except when explicitly starting the carousel and focus is on play
+- Tie the controls and text content together better
+- Headings are sometimes not hidden from SR even when they are not displayed
+- Possible to make jumping to headings work with SR?
+- Focus should always pause the slide, even when manually started.
+
 A carousel component that displays a changing image and some associated content for each. It allows for
 displaying multiple highlighted items in the same prominent place, with the drawback that users may not
 see all of them.

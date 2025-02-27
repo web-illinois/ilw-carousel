@@ -8,7 +8,7 @@ import { ManualSlotController } from "./util/ManualSlotController";
 import { classMap } from "lit/directives/class-map.js";
 import "@illinois-toolkit/ilw-icon";
 import { styleMap } from "lit/directives/style-map.js";
-import {booleanConverter} from "./util/converters";
+import { booleanConverter } from "./util/converters";
 
 @customElement("ilw-carousel")
 export default class Carousel extends LitElement {
@@ -54,15 +54,17 @@ export default class Carousel extends LitElement {
     @property()
     height = "500px";
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     overlay = false;
 
     // Not in state, we don't want these to be reactive. They're used in the animation
-    // and don't affect the render function.
+    // and don't affect the render function. They may be referenced in render to keep
+    // the state consistent.
     private hasHover = false;
     private userStarted = false;
     private hasControlFocus = false;
     private hasTabFocus = false;
+    private hasPlayFocus = false;
     private timer = 0;
     private updateTime = 0;
     private animationRequest = 0;
@@ -98,6 +100,11 @@ export default class Carousel extends LitElement {
         this.playing = !this.playing;
         if (this.playing) {
             this.userStarted = true;
+            if (this.hasPlayFocus) {
+                this.carouselItems.setAttribute("aria-live", "polite");
+            }
+        } else {
+            this.carouselItems.setAttribute("aria-live", "off");
         }
     }
 
@@ -159,16 +166,23 @@ export default class Carousel extends LitElement {
         this.hasHover = false;
     }
 
-    /**
-     * When the slide selectors are focused, make the carousel a live region.
-     */
     protected onTabFocus() {
         this.hasTabFocus = true;
-        this.carouselItems.setAttribute("aria-live", "polite");
     }
 
     protected offTabFocus() {
         this.hasTabFocus = false;
+    }
+
+    protected onPlayFocus() {
+        this.hasPlayFocus = true;
+        if (this.userStarted) {
+            this.carouselItems.setAttribute("aria-live", "polite");
+        }
+    }
+
+    protected offPlayFocus() {
+        this.hasPlayFocus = false;
         this.carouselItems.setAttribute("aria-live", "off");
     }
 
@@ -220,6 +234,10 @@ export default class Carousel extends LitElement {
             event.stopPropagation();
             event.preventDefault();
         }
+    }
+
+    protected hasFocus() {
+        return this.hasControlFocus || this.hasTabFocus || this.hasPlayFocus;
     }
 
     /**
@@ -377,8 +395,8 @@ export default class Carousel extends LitElement {
                                 id="play-pause"
                                 aria-label=${this.playing ? "Stop slides" : "Start slides"}
                                 @click=${this.togglePlay}
-                                @focusin=${this.onTabFocus}
-                                @focusout=${this.offTabFocus}
+                                @focusin=${this.onPlayFocus}
+                                @focusout=${this.offPlayFocus}
                             >
                                 ${this.playing ? "⏸" : "⏵"}
                             </button>
@@ -412,7 +430,7 @@ export default class Carousel extends LitElement {
                         <ilw-icon icon="next" size="32px"></ilw-icon>
                     </button>
                 </div>
-                <div id="carousel-items" aria-live="${this.hasTabFocus ? "polite" : "off"}">${items}</div>
+                <div id="carousel-items" aria-live="${this.hasPlayFocus && this.userStarted ? "polite" : "off"}">${items}</div>
             </section>
         `;
     }
