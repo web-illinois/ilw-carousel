@@ -6,7 +6,7 @@
 
         --ilw-carousel--background: #fff; /*var: Background behind the carousel*/
         --ilw-carousel--control--height: 80px; /*var: Height of the controls area*/
-        --ilw-carousel--control--compact--height: 55px; /*var: Height of the controls area*/
+        --ilw-carousel--control--compact--height: 46px; /*var: Height of the controls area*/
         --ilw-carousel--control--background: var(--il-storm-lighter-4); /*var: Background of the controls area*/
         --ilw-carousel--progress--width: 300px; /*var: Width of the progress bar */
         --ilw-carousel--progress--compact--width: 160px; /*var: Width of the progress bar */

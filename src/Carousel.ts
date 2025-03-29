@@ -103,11 +103,6 @@ export default class Carousel extends LitElement {
         this.playing = !this.playing;
         if (this.playing) {
             this.userStarted = true;
-            if (this.hasPlayFocus) {
-                this.carouselItems.setAttribute("aria-live", "polite");
-            }
-        } else {
-            this.carouselItems.setAttribute("aria-live", "off");
         }
     }
 
@@ -179,14 +174,10 @@ export default class Carousel extends LitElement {
 
     protected onPlayFocus() {
         this.hasPlayFocus = true;
-        if (this.userStarted) {
-            this.carouselItems.setAttribute("aria-live", "polite");
-        }
     }
 
     protected offPlayFocus() {
         this.hasPlayFocus = false;
-        this.carouselItems.setAttribute("aria-live", "off");
     }
 
     /**
@@ -254,7 +245,7 @@ export default class Carousel extends LitElement {
             const now = Date.now();
 
             // This effectively pauses the timer in certain conditions
-            if (this.userStarted || (!this.hasHover && !this.hasControlFocus && !this.hasTabFocus)) {
+            if ((!this.hasHover && !this.hasControlFocus && !this.hasTabFocus)) {
                 const timeMs = this.time * 1000;
                 this.timer += now - this.updateTime;
 
@@ -317,24 +308,44 @@ export default class Carousel extends LitElement {
         const items: TemplateResult[] = [];
         const active = this.activeslide; // activeSlide is 1-based
         const { prev, next } = this.determinePrevNext(count, active);
-
-        for (let slide of this.children) {
-            slide.setAttribute("overlay", this.overlay ? "true" : "false");
-            slide.setAttribute("controls", this.controls);
-            slide.removeAttribute("single");
-        }
+        let previousHeading: string | null = "";
+        let activeHeading: string | null = "";
+        let nextHeading: string | null = "";
 
         for (let i = 1; i <= count; i++) {
+            const slide = this.children.item(i-1) as HTMLElement;
+            slide.setAttribute("overlay", this.overlay ? "true" : "false");
+            slide.setAttribute("controls", this.controls);
+            if (i === active) {
+                slide.setAttribute("aria-hidden", "false");
+            } else {
+                slide.setAttribute("aria-hidden", "true");
+            }
+            slide.removeAttribute("single");
+
             // Lambda function that keeps the index in scope for each tab.
             // Note the tabindex value - it's -1 for all tabs except the active one, which makes the
             // tablist receive focus once, like a radio group.
             let activateSlide = () => this.activateSlide(i);
+
+            // Find the headings in the slide and get the text content
+            // to use as the tab label.
+            let heading = slide.querySelector("h2, h3, h4, h5, h6");
+            let label = heading ? heading.textContent : "";
+            if (active === i) {
+                activeHeading = label;
+            } else if (prev === i) {
+                previousHeading = label;
+            } else if (next === i) {
+                nextHeading = label;
+            }
+
             tabs.push(
                 html` <button
                     id="tab-${i}"
                     type="button"
                     role="tab"
-                    aria-label="Slide ${i}"
+                    aria-label="Slide ${activeHeading}"
                     aria-controls="slide-${i}"
                     aria-selected=${i === active}
                     class=${i === active ? "selected" : nothing}
@@ -413,7 +424,7 @@ export default class Carousel extends LitElement {
                     <button
                         type="button"
                         class="previous-button"
-                        aria-label="Previous Slide"
+                        aria-label="Previous Slide ${previousHeading}"
                         aria-controls="carousel-items"
                         @click=${this.previousClick}
                         @focusin=${this.onControlFocus}
@@ -426,7 +437,7 @@ export default class Carousel extends LitElement {
                     <button
                         type="button"
                         class="next-button"
-                        aria-label="Next Slide"
+                        aria-label="Next Slide ${nextHeading}"
                         aria-controls="carousel-items"
                         @click=${this.nextClick}
                         @focusin=${this.onControlFocus}
@@ -435,7 +446,7 @@ export default class Carousel extends LitElement {
                         <ilw-icon icon="next" size="32px"></ilw-icon>
                     </button>
                 </div>
-                <div id="carousel-items" aria-live="${this.hasPlayFocus && this.userStarted ? "polite" : "off"}">${items}</div>
+                <div id="carousel-items">${items}</div>
             </section>
         `;
     }
