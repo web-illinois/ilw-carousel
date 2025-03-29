@@ -22,6 +22,9 @@ export default class Slide extends LitElement {
     })
     single = false;
 
+    @property()
+    controls: "" | "compact" | "none" = "";
+
     static get styles() {
         return unsafeCSS(styles);
     }
@@ -34,7 +37,8 @@ export default class Slide extends LitElement {
         const classes = {
             "slide-inner": true,
             overlay: this.overlay,
-            single: this.single
+            single: this.single,
+            compact: this.controls === "compact"
         };
 
         return html`

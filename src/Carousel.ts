@@ -52,6 +52,9 @@ export default class Carousel extends LitElement {
     width: "" | "full" = "";
 
     @property()
+    controls: "" | "compact" | "none" = "";
+
+    @property()
     height = "500px";
 
     @property({ type: Boolean })
@@ -77,7 +80,7 @@ export default class Carousel extends LitElement {
     @query("#progress-wrap")
     private progressWrapper!: HTMLDivElement;
 
-    @query("#play-pause")
+    @query(".play-pause")
     private playPause!: HTMLButtonElement;
 
     @queryAll("[role=tab]")
@@ -317,6 +320,7 @@ export default class Carousel extends LitElement {
 
         for (let slide of this.children) {
             slide.setAttribute("overlay", this.overlay ? "true" : "false");
+            slide.setAttribute("controls", this.controls);
             slide.removeAttribute("single");
         }
 
@@ -370,6 +374,7 @@ export default class Carousel extends LitElement {
         const classes = {
             "carousel-inner": true,
             fixed: this.width === "full",
+            compact: this.controls === "compact"
         };
         const style = {
             "--ilw-carousel--height": this.height,
@@ -392,7 +397,7 @@ export default class Carousel extends LitElement {
                         <div class="control-inner">
                             <button
                                 type="button"
-                                id="play-pause"
+                                class="play-pause"
                                 aria-label=${this.playing ? "Stop slides" : "Start slides"}
                                 @click=${this.togglePlay}
                                 @focusin=${this.onPlayFocus}

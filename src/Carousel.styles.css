@@ -6,22 +6,29 @@
 
         --ilw-carousel--background: #fff; /*var: Background behind the carousel*/
         --ilw-carousel--control--height: 80px; /*var: Height of the controls area*/
+        --ilw-carousel--control--compact--height: 55px; /*var: Height of the controls area*/
         --ilw-carousel--control--background: var(--il-storm-lighter-4); /*var: Background of the controls area*/
         --ilw-carousel--progress--width: 300px; /*var: Width of the progress bar */
+        --ilw-carousel--progress--compact--width: 160px; /*var: Width of the progress bar */
         --ilw-carousel--progress--height: 10px; /*var: Height of the progress bar*/
         --ilw-carousel--progress--background: var(--il-blue); /*var: Progress bar base color*/
+        --ilw-carousel--progress--compact--background: #fff; /*var: Progress bar base color*/
         --ilw-carousel--progress--foreground: var(--il-orange); /*var: Color of the progress*/
 
         --ilw-carousel--tabs--column-gap: 10px; /*var: Spacing between slide number tabs*/
+        --ilw-carousel--tabs--compact--column-gap: 2px; /*var: Spacing between slide number tabs*/
         --ilw-carousel--tabs--margin-top: 10px; /*var: Spacing above slide number tabs*/
 
         --ilw-carousel--play--height: 40px; /*var: Play button height*/
-        --ilw-carousel--play--font: 400 1.8rem/1 var(--il-font-sans); /*var: Play button font*/
+        --ilw-carousel--play--font: 400 2.125rem/0.8 var(--il-font-sans); /*var: Play button font*/
         --ilw-carousel--tabs--height: 32px; /*var: Slide number tab height*/
         --ilw-carousel--tabs--width: 32px; /*var: Slide number tab width*/
         --ilw-carousel--tabs--font: 700 1.188rem/1.5 var(--il-font-sans); /*var: Slide number tab font*/
+        --ilw-carousel--tabs--focused-background-color: var(--il-orange); /*var: Slide selection buttons hover background color*/
+        --ilw-carousel--tabs--focused-foreground-color: var(--il-blue); /*var: Slide selection buttons hover foreground color*/
 
         --ilw-carousel--button--border-width: 2px; /*var: Control buttons border width*/
+        --ilw-carousel--button--compact--border-width: 5px; /*var: Control buttons border width*/
         --ilw-carousel--button--background-color: var(--il-blue); /*var: Control buttons background color*/
         --ilw-carousel--button--foreground-color: #fff; /*var: Control buttons foreground color*/
         --ilw-carousel--button--border-color: var(--il-blue); /*var: Control buttons border color*/
@@ -33,10 +40,10 @@
         --ilw-carousel--button--active-border-color: var(--il-blue); /*var: Control buttons active border color*/
 
         --ilw-carousel--prevnext--height: 160px; /*var: Height of the previous/next buttons*/
-        --ilw-carousel--prevnext--width: 44px; /*var: Width of the previous/next buttons*/
+        --ilw-carousel--prevnext--width: 46px; /*var: Width of the previous/next buttons*/
         --ilw-carousel--prevnext--background: var(--ilw-carousel--button--background-color); /*var: Background of the previous/next buttons*/
         --ilw-carousel--prevnext--foreground: var(--ilw-carousel--button--foreground-color); /*var: Fireground of the previous/next buttons*/
-        --ilw-carousel--prevnext--border-width: var(--ilw-carousel--button--border-width); /*var: Border width of the previous/next buttons*/
+        --ilw-carousel--prevnext--border-width: 2px; /*var: Border width of the previous/next buttons*/
         --ilw-carousel--prevnext--border-color: var(--ilw-carousel--button--border-color); /*var: Border color of the previous/next buttons*/
         --ilw-carousel--prevnext--line-height: 1; /*var: Line height of the previous/next buttons */
         --ilw-carousel--prevnext--font-size: 1rem; /*var: Font size of the previous/next buttons */
@@ -112,7 +119,6 @@
     align-items: stretch;
 }
 
-
 .control-position {
     position: absolute;
     top: calc(var(--ilw-carousel--height));
@@ -146,8 +152,44 @@
     column-gap: var(--ilw-carousel--tabs--column-gap);
     margin-top: var(--ilw-carousel--tabs--margin-top);
 }
+.compact {
+    .control-position {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        top: calc(var(--ilw-carousel--height));
+        background: none;
+        height: var(--ilw-carousel--control--compact--height);
+        padding: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+    .control {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        padding: 0 10px;
+        gap: 10px;
+        background: var(--il-blue);
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+    #progress-wrap {
+        width: var(--ilw-carousel--progress--compact--width);
+        background: var(--ilw-carousel--progress--compact--background);
+    }
 
-#play-pause, .tabs > button, .previous-button, .next-button {
+    .control-inner {
+        column-gap: var(--ilw-carousel--tabs--compact--column-gap);
+        margin: 0;
+    }
+}
+
+.previous-button, .next-button, .play-pause, .tabs > button {
 
     background-color: var(--ilw-carousel--button--background-color);
     border: var(--ilw-carousel--button--border-width) solid var(--ilw-carousel--button--border-color);
@@ -185,6 +227,54 @@
     }
 }
 
+.compact {
+    .play-pause {
+        margin-right: 8px;
+        &:hover {
+            background-color: var(--ilw-carousel--tabs--focused-background-color);
+            border-color: var(--ilw-carousel--button--focused-border-color);
+            color: var(--ilw-carousel--tabs--focused-foreground-color);
+        }
+    }
+    .tabs > button {
+        background-color: #fff;
+        border: var(--ilw-carousel--button--border-width) solid var(--ilw-carousel--button--border-color);
+
+        color: var(--il-blue);
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+
+        &:visited {
+            background-color: var(--ilw-carousel--button--background-color);
+            border: var(--ilw-carousel--button--border-width) solid var(--ilw-carousel--button--border-color);
+            color: var(--ilw-carousel--button--foreground-color);
+        }
+
+        &:hover {
+            background-color: var(--ilw-carousel--tabs--focused-background-color);
+            border-color: var(--ilw-carousel--button--focused-border-color);
+            color: var(--ilw-carousel--tabs--focused-foreground-color);
+            text-decoration: underline;
+        }
+
+        &:focus {
+            background-color: var(--ilw-link--focus-background-color);
+            border-color: var(--ilw-link--focus-color);
+            color: var(--ilw-link--focus-color);
+            outline: var(--ilw-link--focus-outline)
+        }
+
+        &:active {
+            background-color: var(--ilw-carousel--button--active-background-color);
+            border-color: var(--ilw-carousel--button--active-border-color);
+            color: var(--ilw-carousel--button--active-color);
+            outline: solid var(--ilw-carousel--button--active-border-color) var(--ilw-carousel--button--border-width)
+        }
+    }
+}
+
 .previous-wrap, .next-wrap {
     position: absolute;
     top: calc(var(--ilw-carousel--height)/2 - var(--ilw-carousel--prevnext--height)/2);
@@ -209,7 +299,7 @@
     font-size: var(--ilw-carousel--prevnext--font-size);
 }
 
-#play-pause {
+.play-pause {
     height: var(--ilw-carousel--play--height);
     flex: 0 0 var(--ilw-carousel--play--height);
     box-sizing: border-box;
@@ -232,10 +322,22 @@
 
             &:focus {
                 background-color: var(--ilw-link--focus-background-color);
-                border-color: var(--ilw-link--focus-color);
+                border-color:var(--ilw-link--focus-background-color);
                 color: var(--ilw-link--focus-color);
                 outline: var(--ilw-link--focus-outline)
             }
+        }
+
+        &:hover {
+            background-color: var(--ilw-carousel--tabs--focused-background-color);
+            color: var(--ilw-carousel--tabs--focused-foreground-color);
+        }
+
+        &:active {
+            background-color: var(--ilw-carousel--button--active-background-color);
+            border-color: var(--ilw-carousel--button--active-border-color);
+            color: var(--ilw-carousel--button--active-color);
+            outline: solid var(--ilw-carousel--button--active-border-color) var(--ilw-carousel--button--border-width)
         }
     }
 }
