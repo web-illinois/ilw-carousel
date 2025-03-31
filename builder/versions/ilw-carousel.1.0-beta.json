@@ -49,10 +49,10 @@
     ],
     "attributes": [
         {
-            "name": "theme",
-            "description": "Color theme used",
+            "name": "controls",
+            "description": "Alternative control layouts.",
             "depreciated": false,
-            "values": ["", "blue"]
+            "values": ["", "compact"]
         },
         {
             "name": "playing",
@@ -103,6 +103,11 @@
             "description": "Height of the controls area [default: 80px]"
         },
         {
+            "name": "--ilw-carousel--control--compact--height",
+            "depreciated": false,
+            "description": "Height of the controls area [default: 46px]"
+        },
+        {
             "name": "--ilw-carousel--control--background",
             "depreciated": false,
             "description": "Background of the controls area [default: var(--il-storm-lighter-4)]"
@@ -111,6 +116,11 @@
             "name": "--ilw-carousel--progress--width",
             "depreciated": false,
             "description": "Width of the progress bar  [default: 300px]"
+        },
+        {
+            "name": "--ilw-carousel--progress--compact--width",
+            "depreciated": false,
+            "description": "Width of the progress bar  [default: 160px]"
         },
         {
             "name": "--ilw-carousel--progress--height",
@@ -123,6 +133,11 @@
             "description": "Progress bar base color [default: var(--il-blue)]"
         },
         {
+            "name": "--ilw-carousel--progress--compact--background",
+            "depreciated": false,
+            "description": "Progress bar base color [default: #fff]"
+        },
+        {
             "name": "--ilw-carousel--progress--foreground",
             "depreciated": false,
             "description": "Color of the progress [default: var(--il-orange)]"
@@ -131,6 +146,11 @@
             "name": "--ilw-carousel--tabs--column-gap",
             "depreciated": false,
             "description": "Spacing between slide number tabs [default: 10px]"
+        },
+        {
+            "name": "--ilw-carousel--tabs--compact--column-gap",
+            "depreciated": false,
+            "description": "Spacing between slide number tabs [default: 2px]"
         },
         {
             "name": "--ilw-carousel--tabs--margin-top",
@@ -145,7 +165,7 @@
         {
             "name": "--ilw-carousel--play--font",
             "depreciated": false,
-            "description": "Play button font [default: 400 1.8rem/1 var(--il-font-sans)]"
+            "description": "Play button font [default: 400 2.125rem/0.8 var(--il-font-sans)]"
         },
         {
             "name": "--ilw-carousel--tabs--height",
@@ -163,9 +183,24 @@
             "description": "Slide number tab font [default: 700 1.188rem/1.5 var(--il-font-sans)]"
         },
         {
+            "name": "--ilw-carousel--tabs--focused-background-color",
+            "depreciated": false,
+            "description": "Slide selection buttons hover background color [default: var(--il-orange)]"
+        },
+        {
+            "name": "--ilw-carousel--tabs--focused-foreground-color",
+            "depreciated": false,
+            "description": "Slide selection buttons hover foreground color [default: var(--il-blue)]"
+        },
+        {
             "name": "--ilw-carousel--button--border-width",
             "depreciated": false,
             "description": "Control buttons border width [default: 2px]"
+        },
+        {
+            "name": "--ilw-carousel--button--compact--border-width",
+            "depreciated": false,
+            "description": "Control buttons border width [default: 5px]"
         },
         {
             "name": "--ilw-carousel--button--background-color",
@@ -220,7 +255,7 @@
         {
             "name": "--ilw-carousel--prevnext--width",
             "depreciated": false,
-            "description": "Width of the previous/next buttons [default: 44px]"
+            "description": "Width of the previous/next buttons [default: 46px]"
         },
         {
             "name": "--ilw-carousel--prevnext--background",
@@ -235,7 +270,7 @@
         {
             "name": "--ilw-carousel--prevnext--border-width",
             "depreciated": false,
-            "description": "Border width of the previous/next buttons [default: var(--ilw-carousel--button--border-width)]"
+            "description": "Border width of the previous/next buttons [default: 2px]"
         },
         {
             "name": "--ilw-carousel--prevnext--border-color",
