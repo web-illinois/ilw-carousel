@@ -14,7 +14,6 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 assetFileNames: (chunkInfo) => {
-                    console.log(chunkInfo);
                     if (chunkInfo.name === "style.css") return "ilw-carousel.css";
                 },
             },
