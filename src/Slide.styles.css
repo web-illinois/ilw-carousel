@@ -10,7 +10,8 @@
         --ilw-slide--overlay--text-color: white;
         --ilw-slide--background: #fff;
         --ilw-slide--content-width: 500px;
-        --ilw-slide--content-extra-padding: 30px;
+        --ilw-slide--content-extra-padding: 1.125rem;
+        --ilw-slide--compact--content-extra-padding: 1rem;
 
         --ilw-slide--overlay--padding: 1.5rem;
         --ilw-slide--overlay--left: 8vw;
@@ -29,6 +30,8 @@
 
 
 .image {
+    border-bottom: 1px solid var(--il-blue);
+
     ::slotted(img) {
         width: 100%;
         height: var(--ilw-carousel--height);
@@ -51,6 +54,12 @@
     padding: calc(var(--ilw-carousel--control--height) + var(--ilw-slide--content-extra-padding)) 1rem 1rem;
 }
 
+.compact {
+    .content-wrap {
+        padding: calc(var(--ilw-carousel--control--compact--height) + var(--ilw-slide--compact--content-extra-padding)) 1rem 1rem;
+    }
+}
+
 .single .content-wrap {
     padding-top: 1rem;
 }
@@ -61,7 +70,7 @@
 }
 @media screen and (min-width: 768px) {
     .overlay {
-        padding-bottom: var(--ilw-carousel--control--height);
+        padding-bottom: calc(var(--ilw-carousel--control--height) + 10px);
 
         .content-wrap {
             padding: 0;

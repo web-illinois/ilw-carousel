@@ -6,15 +6,6 @@ Links: **[ilw-carousel in Builder](https://builder3.toolkit.illinois.edu/compone
 
 ## Overview
 
-TODO:
-
-- Use labels instead of aria-live
-  - Except when explicitly starting the carousel and focus is on play
-- Tie the controls and text content together better
-- Headings are sometimes not hidden from SR even when they are not displayed
-- Possible to make jumping to headings work with SR?
-- Focus should always pause the slide, even when manually started.
-
 A carousel component that displays a changing image and some associated content for each. It allows for
 displaying multiple highlighted items in the same prominent place, with the drawback that users may not
 see all of them.
@@ -36,6 +27,7 @@ informed of the carousel's behavior, making it easier to understand.
 
 The following attributes can control `ilw-carousel`:
 
+- `controls="compact"` reduces the size of the controls.
 - `playing="true"` or `playing="false"` controls if the carousel should autoplay. Note that users who
   have `prefers-reduced-motion` configured, the carousel will never autoplay.
 - `time` in seconds for how long autoplay takes per slide.
@@ -96,6 +88,7 @@ When using the component, follow these guidelines:
 - Give the `ilw-carousel` a descriptive `label`, it will be used as the carousel's accessible name.
 - The image should generally have an alt text, as it is a major component of the content.
 - Avoid using more than 5 slides, very few people are likely to ever see all of them.
+- Give each slide a heading, it will be used as a label for controls.
 
 The carousel is a design that historically hasn't been accessible, and there are some inherent challenges to
 a component that's primarily a visual feature. This implementation tries to be easy to use for everyone:
@@ -107,19 +100,18 @@ a component that's primarily a visual feature. This implementation tries to be e
   3. Tabs for each slide
   4. Previous - Next
   5. Slide contents:
-     - Slide text is above the image so any potential heading in the text is the first element.
+     - Slide text is above the image so any heading in the text is the first element.
 - The buttons controlling slide selection have the role `tab` and work like a radio button group. Focus only lands
   on the active button, and then the selection is changed with arrows when using a keyboard.
-  - The label for a slide just says "Slide (number)", e.g. "Slide 1".
+  - The label for a slide is "Slide <heading text>".
 - Each slide has the role `tabpanel`, and role description "slide".
   - The label for a slide is: (number) of (slide count), e.g. "1 of 3", which is announced
     with the role description "slide".
-- If the tabs have focus, the slide content area is given `aria-live="polite"`, which makes screen readers announce the
-  slide contents when the user manually changes it to a new slide. 
 - If the slide has been controlled manually, has mouse hover or focus in any element except play/pause,
   the slide progression is immediately paused. If the user presses play intentionally, the automatic
   pausing no longer happens.
-- Previous and next buttons have the labels "Previous Slide" and "Next Slide" respectively.
+- Previous and next buttons have the labels "Previous Slide" and "Next Slide" respectively, with the title
+  of the appropriate slide concatenated.
 
 ## External References
 

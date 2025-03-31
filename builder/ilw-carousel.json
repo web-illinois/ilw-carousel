@@ -4,9 +4,9 @@
     "github": "https://github.com/web-illinois/ilw-carousel/",
     "type": "web component",
     "element-name": "ilw-carousel",
-    "description": "Description for builder.",
-    "purpose": "Highlight content with slides.",
+    "description": "An accessible carousel.",
+    "purpose": "Highlight multiple pieces of content.",
     "toolkit-version": "",
     "production-version": "",
-    "development-version": "1.0-alpha"
+    "development-version": "1.0-beta"
 }
