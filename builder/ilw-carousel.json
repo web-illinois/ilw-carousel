@@ -7,6 +7,6 @@
     "description": "An accessible carousel.",
     "purpose": "Highlight multiple pieces of content.",
     "toolkit-version": "",
-    "production-version": "",
+    "production-version": "1.0",
     "development-version": "1.0-beta"
 }
