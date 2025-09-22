@@ -60,6 +60,9 @@ export default class Carousel extends LitElement {
     @property({ type: Boolean })
     overlay = false;
 
+    _simulatedHover = false;
+    _simulatedFocus = false;
+
     // Not in state, we don't want these to be reactive. They're used in the animation
     // and don't affect the render function. They may be referenced in render to keep
     // the state consistent.
@@ -292,7 +295,6 @@ export default class Carousel extends LitElement {
     }
 
     protected updated(changedProperties: PropertyValues) {
-        console.log(changedProperties);
         super.updated(changedProperties);
 
         // Listen to focus events on links inside the carousel content so we can pause progress
@@ -303,6 +305,9 @@ export default class Carousel extends LitElement {
     }
 
     render() {
+
+        let simulateHover = !!this.getAttribute("data-simulated-hover");
+        let simulateFocus = !!this.getAttribute("data-simulated-focus");
         let count = this.children.length;
         const tabs: TemplateResult[] = [];
         const items: TemplateResult[] = [];
@@ -399,6 +404,8 @@ export default class Carousel extends LitElement {
                 aria-label=${this.label}
                 @mouseover=${this.mouseOver}
                 @mouseout=${this.mouseOut}
+                data-simulate-hover=${simulateHover ? "true" : nothing}
+                data-simulate-focus=${simulateFocus ? "true" : nothing}
             >
                 <div class="control-position">
                     <div class="control">

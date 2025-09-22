@@ -45,11 +45,11 @@ ilw-slide {
             a:not([slot="buttons"] a) {
                 color: var(--ilw-slide--overlay--text-color);
 
-                &:hover {
+                &:hover, &:is([data-simulate-hover] *) {
                     color: var(--il-orange);
                 }
 
-                &:focus {
+                &:focus, &:is([data-simulate-focus] *) {
                     color: var(--il-blue);
                     background: var(--ilw-link--focus-background-color);
                 }
