@@ -60,6 +60,9 @@ export default class Carousel extends LitElement {
     @property({ type: Boolean })
     overlay = false;
 
+    _simulatedHover = false;
+    _simulatedFocus = false;
+
     // Not in state, we don't want these to be reactive. They're used in the animation
     // and don't affect the render function. They may be referenced in render to keep
     // the state consistent.
@@ -292,7 +295,6 @@ export default class Carousel extends LitElement {
     }
 
     protected updated(changedProperties: PropertyValues) {
-        console.log(changedProperties);
         super.updated(changedProperties);
 
         // Listen to focus events on links inside the carousel content so we can pause progress
@@ -303,13 +305,15 @@ export default class Carousel extends LitElement {
     }
 
     render() {
+
+        let simulateHover = !!this.getAttribute("data-simulated-hover");
+        let simulateFocus = !!this.getAttribute("data-simulated-focus");
         let count = this.children.length;
         const tabs: TemplateResult[] = [];
         const items: TemplateResult[] = [];
         const active = this.activeslide; // activeSlide is 1-based
         const { prev, next } = this.determinePrevNext(count, active);
         let previousHeading: string | null = "";
-        let activeHeading: string | null = "";
         let nextHeading: string | null = "";
 
         for (let i = 1; i <= count; i++) {
@@ -332,9 +336,7 @@ export default class Carousel extends LitElement {
             // to use as the tab label.
             let heading = slide.querySelector("h2, h3, h4, h5, h6");
             let label = heading ? heading.textContent : "";
-            if (active === i) {
-                activeHeading = label;
-            } else if (prev === i) {
+            if (prev === i) {
                 previousHeading = label;
             } else if (next === i) {
                 nextHeading = label;
@@ -345,7 +347,7 @@ export default class Carousel extends LitElement {
                     id="tab-${i}"
                     type="button"
                     role="tab"
-                    aria-label="Slide ${activeHeading}"
+                    aria-label="Slide ${label}"
                     aria-controls="slide-${i}"
                     aria-selected=${i === active}
                     class=${i === active ? "selected" : nothing}
@@ -399,6 +401,8 @@ export default class Carousel extends LitElement {
                 aria-label=${this.label}
                 @mouseover=${this.mouseOver}
                 @mouseout=${this.mouseOut}
+                data-simulate-hover=${simulateHover ? "true" : nothing}
+                data-simulate-focus=${simulateFocus ? "true" : nothing}
             >
                 <div class="control-position">
                     <div class="control">

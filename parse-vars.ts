@@ -1,6 +1,8 @@
-import { readFileSync } from "node:fs";
+import {readFileSync} from "node:fs";
 
-const contents = readFileSync("src/Carousel.styles.css", "utf-8");
+const contents = readFileSync("src/Carousel.styles.css", "utf-8")
+    + readFileSync("src/Slide.styles.css", "utf-8");
+
 const regex = /^\s*(--[\w-]+):\s*([^;]+);\s*\/\*\s*(var|vardep):\s*(.+)\*\s*\/$/gm;
 
 let output = [];

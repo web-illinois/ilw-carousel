@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Carousel Component</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.brand.illinois.edu/illinois.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://dev.toolkit.illinois.edu/ilw-global/3.0.0-alpha/ilw-global.css"
+    />
+    <link rel="stylesheet" href="../src/ilw-colors.css"/>
+    <script type="module" src="../src/ilw-carousel.ts"></script>
+</head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<body>
+<h1>Carousel Component</h1>
+
+<div id="grid">
+    <ilw-carousel id="one" label="Selected natural scenes">
+        <ilw-slide>
+            <h3>Northern Lights</h3>
+            <p>Also known as <a href="#">aurora borealis</a>, they illuminate the sky.</p>
+            <div class="ilw-buttons" slot="buttons">
+                <button class="ilw-button">Explore Illinois</button>
+            </div>
+            <img src="https://fastly.picsum.photos/id/724/1920/768.jpg?hmac=oaOY1Ja3q32qdCoUGuVXUNvp6bQq3WSNi1Fbp6KbmAc"
+                 alt="Red and green lights in the night sky with evergreen trees in the foreground."
+                 slot="image">
+        </ilw-slide>
+        <ilw-slide>
+            <h3>Tundra</h3>
+            <p>Tundra is a type of biome where tree growth is hindered by frigid temperatures and short growing
+                seasons.</p>
+            <img src="https://fastly.picsum.photos/id/547/1920/768.jpg?hmac=QK_aYd-IVY12I8ZvvuSMbzgFNFxaXGLobEAeaPLTQEA"
+                 alt="Landscape photo of wooded hills with patches of snow, and mountains in the distance."
+                 slot="image">
+        </ilw-slide>
+        <ilw-slide>
+            <h3>Blue Flowers</h3>
+            <p>Clusters of blue flowers with vivid colors.</p>
+            <img src="https://fastly.picsum.photos/id/701/1920/768.jpg?hmac=CO7UTJncYibcckG8WC6NI4QGf0ZRd7bXwmukliNyYDc"
+                 alt="Close-up photo of a field of blue flowers."
+                 slot="image">
+        </ilw-slide>
+    </ilw-carousel>
+
+    <ilw-carousel id="two">
+        <ilw-slide>
+            <img src="https://fastly.picsum.photos/id/701/1920/768.jpg?hmac=CO7UTJncYibcckG8WC6NI4QGf0ZRd7bXwmukliNyYDc"
+                 alt="Close-up photo of a field of blue flowers."
+                 slot="image">
+            <h3>Blue Flowers</h3>
+            <p>Clusters of blue flowers with vivid colors.</p>
+        </ilw-slide>
+    </ilw-carousel>
+</div>
+
+<script type="module">
+    import {createVariations} from "@illinois-toolkit/ilw-core";
+    import {Carousel} from "../src/ilw-carousel.js";
+
+    createVariations(
+        document.getElementById("grid"),
+        Carousel,
+        {
+            controls: ["compact", undefined],
+            width: ["full", undefined],
+            height: ["300px", "400px", "500px"],
+            overlay: ["true", undefined],
+            theme: ["blue", undefined],
+            "data-simulated-hover": [undefined, "true"],
+            "data-simulated-focus": [undefined, "true"],
+        },
+        ["one", "two"],
+    );
+</script>
+</body>
+</html>

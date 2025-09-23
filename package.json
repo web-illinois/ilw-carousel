@@ -4,7 +4,7 @@
     "repository": "github:web-illinois/ilw-carousel",
     "private": false,
     "license": "MIT",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "type": "module",
     "files": [
         "src/**",
@@ -25,19 +25,29 @@
     "module": "./dist/ilw-carousel.js",
     "scripts": {
         "dev": "vite",
-        "build": "vite build --config vite.transpile.config.js --emptyOutDir && vite build --config vite.build.config.js --emptyOutDir",
+        "build": "tsc --noEmit && vite build --config vite.transpile.config.ts --emptyOutDir && vite build --config vite.build.config.ts --emptyOutDir",
         "preview": "vite preview",
-        "prepack": "npm run build"
+        "prepack": "npm run build",
+        "test:axe": "playwright test",
+        "test:axe:github": "playwright test --config playwright.ci.config.ts",
+        "test": "vitest run --browser.headless",
+        "test:browser": "vitest watch --browser chromium"
     },
     "dependencies": {
-        "@illinois-toolkit/ilw-icon": "1.1.0-alpha",
+        "@illinois-toolkit/ilw-icon": "1.1.0",
         "lit": "3.1.3"
     },
     "devDependencies": {
-        "@types/node": "^22.10.5",
-        "prettier": "^3.4.2",
-        "typescript": "^5.8.2",
-        "vite": "^5.4.18",
-        "vite-plugin-dts": "^4.5.3"
+        "@illinois-toolkit/ilw-core": "^1.0.2",
+        "@types/node": "^22.18.6",
+        "prettier": "^3.6.2",
+        "typescript": "^5.9.2",
+        "vite": "7.1.7",
+        "vite-plugin-dts": "^4.5.4",
+        "@playwright/test": "^1.54.1",
+        "@vitest/browser": "^3.2.4",
+        "playwright": "^1.54.1",
+        "postcss-nested": "^6.2.0",
+        "vitest-browser-lit": "^0.1.0"
     }
 }
