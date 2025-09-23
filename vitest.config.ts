@@ -17,5 +17,6 @@ export default defineConfig({
             "/*.config.*",
             "**/test-axe/**",
         ],
+        testTimeout: 4_000
     },
 });

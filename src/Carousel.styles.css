@@ -3,6 +3,7 @@
     :host {
         --ilw-carousel--font: var(--il-font-sans); /*var: Font for the carousel text content*/
         --ilw-carousel--height: 500px; /*var: Carousel image height*/
+        --ilw-carousel--background: #fff; /*var: Background behind text content below the carousel*/
 
         --ilw-carousel--control--height: 80px; /*var: Height of the controls area*/
         --ilw-carousel--control--compact--height: 46px; /*var: Height of the controls area*/
@@ -16,7 +17,7 @@
         --ilw-carousel--tabs--margin-top: 10px; /*var: Spacing above slide number tabs*/
 
         --ilw-carousel--play--height: 40px; /*var: Play button height*/
-        --ilw-carousel--play--font: 400 2.125rem/0.8 var(--il-font-sans); /*var: Play button font*/
+        --ilw-carousel--play--font: 400 2.125rem/0.5 var(--il-font-sans); /*var: Play button font*/
         --ilw-carousel--tabs--height: 32px; /*var: Slide number tab height*/
         --ilw-carousel--tabs--width: 32px; /*var: Slide number tab width*/
         --ilw-carousel--tabs--font: 700 1.188rem/1.5 var(--il-font-sans); /*var: Slide number tab font*/
@@ -47,7 +48,7 @@
     position: relative;
     container-type: inline-size;
     overflow: hidden;
-    background: var(--ilw-color--background);
+    background: var(--ilw-carousel--background);
 
     &.fixed {
         left:50%;
@@ -148,7 +149,6 @@
     }
     #progress-wrap {
         width: var(--ilw-carousel--progress--compact--width);
-        background: var(--ilw-color--control);
     }
 
     .control-inner {
@@ -188,11 +188,12 @@
 
 .compact {
     .play-pause {
+        border-color: var(--ilw-color--control);
         margin-right: 8px;
         &:hover, &:is([data-simulate-hover] *) {
-            background-color: var(--ilw-color--control-accent);
-            border-color: var(--ilw-color--control-text);
-            color: var(--ilw-color--control-text);
+            background-color: var(--ilw-color--text);
+            border-color: var(--ilw-color--text);
+            color: var(--ilw-color--background);
             text-decoration: none;
         }
 
@@ -201,36 +202,6 @@
             border-color: var(--ilw-link--focus-color);
             color: var(--ilw-link--focus-color);
             outline: var(--ilw-link--focus-outline)
-        }
-    }
-    .tabs > button {
-        background-color: var(--ilw-color--background);
-        border: var(--ilw-carousel--button--border-width) solid var(--ilw-color--control-text);
-
-        color: var(--ilw-color--control-text);
-        cursor: pointer;
-        display: inline-block;
-        text-align: center;
-        text-decoration: none;
-
-        &:hover, &:is([data-simulate-hover] *) {
-            background-color: var(--ilw-color--control-accent);
-            border-color: var(--ilw-color--control-text);
-            color: var(--ilw-color--control);
-            text-decoration: underline;
-        }
-
-        &:focus, &:is([data-simulate-focus] *) {
-            background-color: var(--ilw-color--focus--background);
-            border-color: var(--ilw-color--focus--outline);
-            color: var(--ilw-color--focus--text);
-            outline-color: var(--ilw-color--focus--outline);
-        }
-
-        &:active {
-            background-color: var(--ilw-color--control-accent);
-            border-color: var(--ilw-color--control-text);
-            color: var(--ilw-color--control-text);
         }
     }
 }
@@ -266,6 +237,7 @@ button.previous-button, button.next-button {
 button.play-pause {
     height: var(--ilw-carousel--play--height);
     flex: 0 0 var(--ilw-carousel--play--height);
+    overflow-y: clip;
     box-sizing: border-box;
     font: var(--ilw-carousel--play--font);
     &:hover {
@@ -282,6 +254,28 @@ button.play-pause {
         height: var(--ilw-carousel--tabs--width);
         font: var(--ilw-carousel--tabs--font);
 
+
+
+        &:hover, &:is([data-simulate-hover] *) {
+            background-color: var(--ilw-color--text);
+            border-color: var(--ilw-color--text);
+            color: var(--ilw-color--background);
+            text-decoration: underline;
+        }
+
+        &:focus, &:is([data-simulate-focus] *) {
+            background-color: var(--ilw-color--focus--background);
+            border-color: var(--ilw-color--focus--outline);
+            color: var(--ilw-color--focus--text);
+            outline-color: var(--ilw-color--focus--outline);
+        }
+
+        &:active {
+            background-color: var(--ilw-color--control-accent);
+            border-color: var(--ilw-color--control-text);
+            color: var(--ilw-color--control-text);
+        }
+
         &.selected {
             background-color: var(--ilw-color--control-accent);
             border-color: var(--ilw-color--control-text);
@@ -293,18 +287,6 @@ button.play-pause {
                 color: var(--ilw-link--focus-color);
                 outline: var(--ilw-link--focus-outline)
             }
-        }
-
-        &:hover, &:is([data-simulate-hover] *) {
-            background-color: var(--ilw-color--control-accent);
-            color: var(--ilw-color--control-text);
-        }
-
-        &:active {
-            background-color: var(--ilw-carousel--button--active-background-color);
-            border-color: var(--ilw-carousel--button--active-border-color);
-            color: var(--ilw-carousel--button--active-color);
-            outline: solid var(--ilw-carousel--button--active-border-color) var(--ilw-carousel--button--border-width)
         }
     }
 }
