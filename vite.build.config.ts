@@ -6,9 +6,9 @@ export default defineConfig({
     build: {
         outDir: "../dist/cdn",
         lib: {
-            name: "ilw-card",
-            entry: "ilw-card.ts",
-            fileName: "ilw-card",
+            name: "ilw-carousel",
+            entry: "ilw-carousel.ts",
+            fileName: "ilw-carousel",
             formats: ["es"],
         },
         rollupOptions: {

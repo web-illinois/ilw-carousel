@@ -1,17 +1,17 @@
-import {Locator} from "@vitest/browser/context";
 import 'vitest'
-import { expect } from "vitest";
+import {expect} from "vitest";
 
 interface CustomMatchers<R = unknown> {
     toBeInViewport: () => R
 }
 
 declare module 'vitest' {
-    interface Matchers<T = any> extends CustomMatchers<T> {}
+    interface Matchers<T = any> extends CustomMatchers<T> {
+    }
 }
 expect.extend({
     toBeInViewport(element: HTMLElement) {
-        const { isNot } = this
+        const {isNot} = this
         if (!element) {
             return {
                 pass: false,
