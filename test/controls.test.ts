@@ -4,7 +4,7 @@ import { html } from "lit";
 import "../src/ilw-carousel";
 import "../src/ilw-colors.css";
 import { vi } from "vitest";
-import "./util";
+import "@illinois-toolkit/ilw-core/expect";
 
 const content = html`
     <ilw-carousel>
