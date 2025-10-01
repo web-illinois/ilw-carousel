@@ -11,13 +11,6 @@ export default defineConfig({
             fileName: "ilw-carousel",
             formats: ["es"],
         },
-        rollupOptions: {
-            output: {
-                assetFileNames: () => {
-                    return "[name][extname]";
-                },
-            },
-        },
     },
     server: {
         hmr: false,

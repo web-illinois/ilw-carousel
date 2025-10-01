@@ -2,7 +2,6 @@ import { expect, test } from "vitest";
 import { render } from "vitest-browser-lit";
 import { html } from "lit";
 import "../src/ilw-carousel";
-import "../src/ilw-colors.css";
 import { vi } from "vitest";
 import "@illinois-toolkit/ilw-core/expect";
 

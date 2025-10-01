@@ -6,7 +6,7 @@
     "element-name": "ilw-carousel",
     "description": "Changing slides with images and text.",
     "builder-version": "1.1-beta",
-    "version": "1.1.0-beta",
+    "version": "1.1.0-beta2",
     "date": "11/17/2024",
     "css": "https://dev.toolkit.illinois.edu/ilw-carousel/1.1.0-beta/ilw-carousel.css",
     "js": "https://dev.toolkit.illinois.edu/ilw-carousel/1.1.0-beta/ilw-carousel.js",
