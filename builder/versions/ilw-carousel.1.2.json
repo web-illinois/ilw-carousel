@@ -58,6 +58,16 @@
             ]
         },
         {
+            "name": "theme",
+            "description": "Color theme used",
+            "depreciated": false,
+            "values": [
+                "",
+                "gray",
+                "blue"
+            ]
+        },
+        {
             "name": "playing",
             "description": "If the carousel should autoplay on load.",
             "depreciated": false,
