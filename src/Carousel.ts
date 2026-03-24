@@ -365,7 +365,7 @@ export default class Carousel extends LitElement {
                     @focusout=${this.offTabFocus}
                     @keydown=${this.tabsKeyDown}
                 >
-                    <span aria-hidden="true">${i}</span>
+                    <span>${i}</span>
                 </button>`,
             );
             let classes = {

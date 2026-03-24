@@ -19,7 +19,7 @@
         --ilw-carousel--play--height: 40px; /*var: Play button height*/
         --ilw-carousel--tabs--height: 32px; /*var: Slide number tab height*/
         --ilw-carousel--tabs--width: 32px; /*var: Slide number tab width*/
-        --ilw-carousel--tabs--font: 700 1.188rem/1 var(--il-font-sans); /*var: Slide number tab font*/
+        --ilw-carousel--tabs--font: 700 20px/20px var(--il-font-sans); /*var: Slide number tab font*/
 
         --ilw-carousel--button--border-width: 2px; /*var: Control buttons border width*/
         --ilw-carousel--button--compact--border-width: 5px; /*var: Control buttons border width*/
@@ -260,7 +260,12 @@ button.play-pause {
         width: var(--ilw-carousel--tabs--height);
         height: var(--ilw-carousel--tabs--width);
         font: var(--ilw-carousel--tabs--font);
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & > span {
+            display: block;
+        }
 
 
         &:hover, &:is([data-simulate-hover] *) {
