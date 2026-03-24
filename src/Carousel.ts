@@ -7,6 +7,7 @@ import { customElement, property, query, queryAll } from "lit/decorators.js";
 import { ManualSlotController } from "./util/ManualSlotController";
 import { classMap } from "lit/directives/class-map.js";
 import "@illinois-toolkit/ilw-icon";
+import "@illinois-toolkit/ilw-icon/ilw-icon.css";
 import { styleMap } from "lit/directives/style-map.js";
 import { booleanConverter } from "./util/converters";
 
