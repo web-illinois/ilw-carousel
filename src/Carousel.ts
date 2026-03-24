@@ -10,6 +10,9 @@ import "@illinois-toolkit/ilw-icon";
 import { styleMap } from "lit/directives/style-map.js";
 import { booleanConverter } from "./util/converters";
 
+const playIcon = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="currentColor"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18a1 1 0 0 0 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/></svg>`;
+const pauseIcon = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 5 14 14" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>`;
+
 @customElement("ilw-carousel")
 export default class Carousel extends LitElement {
     static shadowRootOptions: ShadowRootInit = { ...LitElement.shadowRootOptions, slotAssignment: "manual" };
@@ -342,12 +345,17 @@ export default class Carousel extends LitElement {
                 nextHeading = label;
             }
 
+            let ariaLabel = `Slide ${i} of ${count}`;
+            if (label) {
+                ariaLabel += `: ${label}`;
+            }
+
             tabs.push(
                 html` <button
                     id="tab-${i}"
                     type="button"
                     role="tab"
-                    aria-label="Slide ${label}"
+                    aria-label=${ariaLabel}
                     aria-controls="slide-${i}"
                     aria-selected=${i === active}
                     class=${i === active ? "selected" : nothing}
@@ -406,9 +414,6 @@ export default class Carousel extends LitElement {
             >
                 <div class="control-position">
                     <div class="control">
-                        <div id="progress-wrap">
-                            <div id="progress"></div>
-                        </div>
                         <div class="control-inner">
                             <button
                                 type="button"
@@ -418,7 +423,7 @@ export default class Carousel extends LitElement {
                                 @focusin=${this.onPlayFocus}
                                 @focusout=${this.offPlayFocus}
                             >
-                                ${this.playing ? "⏸" : "⏵"}
+                                ${this.playing ? pauseIcon : playIcon}
                             </button>
                             <div class="tabs" role="tablist" aria-label="Slide Selector">${tabs}</div>
                         </div>
