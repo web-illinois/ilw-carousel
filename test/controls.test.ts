@@ -55,7 +55,7 @@ test("slide 2 button is active when on second slide", async () => {
     const screen = render(content);
     const button = screen.getByRole("button", { name: "Next slide" });
     await button.click();
-    const slide2Button = screen.getByRole("tab", { name: "Slide Tundra Pic" });
+    const slide2Button = screen.getByRole("tab", { name: "Slide 2 of 3: Tundra Pic" });
     await expect.element(slide2Button).toHaveClass("selected");
 });
 
@@ -75,7 +75,7 @@ test("slide 3 button is active when on third slide", async () => {
     const button = screen.getByRole("button", { name: "Next slide" });
     await button.click();
     await button.click();
-    const slide3Button = screen.getByRole("tab", { name: "Slide Third" });
+    const slide3Button = screen.getByRole("tab", { name: "Slide 3 of 3: Third" });
     await expect.element(slide3Button).toHaveClass("selected");
 });
 
@@ -113,6 +113,6 @@ test("slide 3 button is active when on third slide via previous button", async (
     const screen = render(content);
     const button = screen.getByRole("button", { name: "Previous slide" });
     await button.click();
-    const slide3Button = screen.getByRole("tab", { name: "Slide Third" });
+    const slide3Button = screen.getByRole("tab", { name: "Slide 3 of 3: Third" });
     await expect.element(slide3Button).toHaveClass("selected");
 });
