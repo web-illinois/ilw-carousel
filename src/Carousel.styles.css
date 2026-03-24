@@ -17,10 +17,9 @@
         --ilw-carousel--tabs--margin-top: 10px; /*var: Spacing above slide number tabs*/
 
         --ilw-carousel--play--height: 40px; /*var: Play button height*/
-        --ilw-carousel--play--font: 400 2.125rem/0.5 var(--il-font-sans); /*var: Play button font*/
         --ilw-carousel--tabs--height: 32px; /*var: Slide number tab height*/
         --ilw-carousel--tabs--width: 32px; /*var: Slide number tab width*/
-        --ilw-carousel--tabs--font: 700 1.188rem/1.5 var(--il-font-sans); /*var: Slide number tab font*/
+        --ilw-carousel--tabs--font: 700 1.188rem/1 var(--il-font-sans); /*var: Slide number tab font*/
 
         --ilw-carousel--button--border-width: 2px; /*var: Control buttons border width*/
         --ilw-carousel--button--compact--border-width: 5px; /*var: Control buttons border width*/
@@ -237,9 +236,17 @@ button.previous-button, button.next-button {
 button.play-pause {
     height: var(--ilw-carousel--play--height);
     flex: 0 0 var(--ilw-carousel--play--height);
-    overflow-y: clip;
+    overflow: hidden;
     box-sizing: border-box;
-    font: var(--ilw-carousel--play--font);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+        width: 80%;
+        height: 80%;
+    }
+
     &:hover {
         text-decoration: none;
     }
