@@ -22,9 +22,6 @@ ways of interaction:
     attempting to play it. In that case it may be confusing if activating the button appears to do nothing when
     it's already paused by the hover.
 
-Additionally, there is a visual progress bar showing how soon the next slide will appear. This keeps the user
-informed of the carousel's behavior, making it easier to understand.
-
 The following attributes can control `ilw-carousel`:
 
 - `controls="compact"` reduces the size of the controls.
@@ -68,14 +65,14 @@ black box in overlay mode.
     <p>Tundra is a type of biome where tree growth is hindered by frigid temperatures and short growing
       seasons.</p>
     <img src="https://fastly.picsum.photos/id/547/1920/768.jpg?hmac=QK_aYd-IVY12I8ZvvuSMbzgFNFxaXGLobEAeaPLTQEA"
-         alt="Landscape photo of wooded hills with patches of snow, and mountains in the distance."
+         alt="Landscape of wooded hills with patches of snow, and mountains in the distance."
          slot="image">
   </ilw-slide>
   <ilw-slide>
     <h3>Blue Flowers</h3>
     <p>Clusters of blue flowers with vivid colors.</p>
     <img src="https://fastly.picsum.photos/id/701/1920/768.jpg?hmac=CO7UTJncYibcckG8WC6NI4QGf0ZRd7bXwmukliNyYDc"
-         alt="Close-up photo of a field of blue flowers."
+         alt="Close-up of a field of blue flowers."
          slot="image">
   </ilw-slide>
 </ilw-carousel>
@@ -95,23 +92,23 @@ a component that's primarily a visual feature. This implementation tries to be e
 
 - The carousel's first element is a `section` with the role description "carousel".
 - In the HTML, all controls appear before the slide contents, in the following order:
-  1. Progress bar
-  2. Play/pause button
-  3. Tabs for each slide
-  4. Previous - Next
-  5. Slide contents:
-     - Slide text is above the image so any heading in the text is the first element.
+  1. Play/pause button
+  2. Tabs for each slide
+  3. Previous - Next buttons
+  4. Slide contents:
+     - Slide text is above the image, so any heading in the text is the first element.
 - The buttons controlling slide selection have the role `tab` and work like a radio button group. Focus only lands
   on the active button, and then the selection is changed with arrows when using a keyboard.
-  - The label for a slide is "Slide <heading text>".
+  - The label for a tab button is "Slide 1 of 3: <heading text>", where 1 is the slide number and 3 is the total
+    number of slides.
 - Each slide has the role `tabpanel`, and role description "slide".
   - The label for a slide is: (number) of (slide count), e.g. "1 of 3", which is announced
     with the role description "slide".
 - If the slide has been controlled manually, has mouse hover or focus in any element except play/pause,
   the slide progression is immediately paused. If the user presses play intentionally, the automatic
   pausing no longer happens.
-- Previous and next buttons have the labels "Previous Slide" and "Next Slide" respectively, with the title
-  of the appropriate slide concatenated.
+- Previous and next buttons have the labels "Previous Slide: <heading text>" and "Next Slide: <heading text>" respectively,
+  using the headings from the appropriate slides.
 
 ## External References
 
