@@ -1,12 +1,21 @@
 {
-    "title": "Carousel",
-    "tag": "ilw-carousel",
-    "github": "https://github.com/web-illinois/ilw-carousel/",
-    "type": "web component",
-    "element-name": "ilw-carousel",
-    "description": "An accessible carousel.",
-    "purpose": "Highlight multiple pieces of content.",
-    "toolkit-version": "1.2",
-    "production-version": "1.2",
-    "development-version": "1.3-beta"
+  "title": "Carousel",
+  "id": "ilw-carousel",
+  "type": "Web Component",
+  "repository-name": "ilw-carousel",
+  "description": "Present several featured items in an accessible, space-saving slideshow that visitors can navigate.",
+  "purpose": "Highlight multiple pieces of content.",
+  "customtemplates": [],
+  "versions": [
+    {
+      "name": "1.0",
+      "notes": "",
+      "template": "1.0"
+    },
+    {
+      "name": "1.2",
+      "notes": "",
+      "template": "1.2"
+    }
+  ]
 }
